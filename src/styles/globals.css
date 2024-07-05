@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 100% 97%;
+    --foreground: 339 20% 20%;
+    --primary: 308 56% 85%;
+    --primary-foreground: 210 22% 22%;
+    --secondary: 196 75% 88%;
+    --secondary-foreground: 210 22% 22%;
+    --accent: 211 86% 70%;
+    --accent-foreground: 210 22% 22%;
+    --destructive: 0 93% 73%;
+    --destructive-foreground: 210 22% 22%;
+    --muted: 210 100% 95%;
+    --muted-foreground: 210 22% 22%;
+    --card: 210 100% 97%;
+    --card-foreground: 210 22% 22%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 341 20% 22%;
+    --border: 210 40% 80%;
+    --input: 210 40% 56%;
+    --ring: 210 40% 60%;
+    --radius: 1rem;
+  }
+
+  body {
+    @apply bg-darkBlue text-textPrimary;
+  }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #ff8a00, #e52e71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hover\:scale-105:hover {
+    transform: scale(1.05);
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .shadow-xl {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .bg-darkBlue {
+    background-color: #1e293b;
+  }
+
+  .bg-darkBlueLight {
+    background-color: #2e3a4e;
+  }
+
+  .bg-gradient-featured {
+    background: linear-gradient(180deg, #1e293b 0%, #2e3a4e 100%);
+  }
+
+  .bg-gradient-inverted {
+    background: linear-gradient(180deg, #2e3a4e 0%, #1e293b 100%);
+  }
+
+  .gradient-bg {
+    background: linear-gradient(90deg, #7851a9, #836953);
+  }
+
+  .text-lightBlue {
+    color: #7298da;
+  }
+
+  .text-textSecondary {
+    color: #a0aec0;
+  }
+
+  .header-link {
+    color: #a0aec0;
+    transition: color 0.2s, transform 0.2s;
+    font-size: 0.875rem;
+
+    &:hover {
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    &.active {
+      color: #fff;
+    }
+  }
+
+  .bg-lightBlue {
+    background-color: #010203;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground rounded-full px-6 py-3 shadow-lg hover:scale-105 transition-transform;
+  }
+
+  .max-w-prose {
+    max-width: 65ch;
+  }
+
+  .profile-circle {
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+
+  .profile-image {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 400px;
+  }
+
+  .view-project-button {
+    background: linear-gradient(90deg, #7851a9, #836953);
+    background-size: 200% 100%;
+    transition: background-position 0.5s;
+  }
+
+  .view-project-button:hover {
+    background-position: right center;
+  }
+
+  .preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1a1a1a;
+    z-index: 1000;
+  }
+
+  .preloader h1 {
+    color: white;
+    font-size: 2rem;
+  }
+}

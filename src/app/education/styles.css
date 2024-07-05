@@ -1,0 +1,28 @@
+/* Add this to your global CSS or a specific CSS file */
+
+.timeline-container {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px;
+    height: 100%;
+    width: 2px;
+    background-color: #4299e1; /* Change this color to match your theme */
+  }
+  
+  .timeline-dot {
+    position: absolute;
+    top: 0;
+    left: 6px;
+    height: 10px;
+    width: 10px;
+    background-color: #4299e1; /* Change this color to match your theme */
+    border-radius: 50%;
+  }
+  

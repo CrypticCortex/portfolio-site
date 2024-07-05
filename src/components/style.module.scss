@@ -1,0 +1,105 @@
+.cardContainer {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 80%; // Adjust width as needed
+    max-width: 1000px;
+    border-radius: 25px;
+    padding: 2rem;
+    background: #1E293B;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem; // Add spacing between cards
+
+    .cardImage {
+      border-radius: 1rem 1rem 0 0;
+      object-fit: cover;
+      width: 100%;
+      height: 200px; // Adjusted height for better proportion
+    }
+
+    .cardContent {
+      padding: 1.5rem;
+      color: #F1F5F9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .cardTitle {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #E2E8F0;
+      }
+
+      .cardDescription {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        color: #CBD5E1;
+      }
+
+      .buttonContainer {
+        margin-top: 1rem;
+
+        .animatedButton {
+          --width: 100%;
+          --time: 0.1s;
+          position: relative;
+          display: inline-block;
+          padding: 0.75rem 1.5rem;
+          color: #1E293B;
+          background: #F1F5F9;
+          overflow: hidden;
+          cursor: pointer;
+          border-radius: 5px;
+          text-align: center;
+          line-height: 2.5;
+          transition: background var(--time);
+
+          &:hover {
+            background: #E2E8F0;
+          }
+
+          text {
+            position: relative;
+            z-index: 5;
+            transition: color var(--time);
+            display: inline-block;
+          }
+
+          span {
+            position: absolute;
+            display: block;
+            z-index: 0;
+            width: 0;
+            height: 0;
+            border-radius: 100%;
+            background: #1E293B;
+            transform: translate(-50%, -50%);
+            transition: width var(--time), padding-top var(--time);
+          }
+
+          &:hover span {
+            width: calc(var(--width) * 2.25);
+            padding-top: calc(var(--width) * 2.25);
+          }
+
+          &:hover text {
+            color: #F1F5F9;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+// page.module.scss
+
+.cardContainer {
+  perspective: 1000px;
+  margin-bottom: 2rem;
+}
+
+.card {
+  will-change: transform;
+  transition: transform 0.3s ease;
+  position: relative;
+  margin-bottom: -20vh; // Adjust this to stack cards correctly
+}
+
+.card img {
+  border-radius: 0.5rem;
+  object-fit: cover;
+  width: 100%;
+}
+
