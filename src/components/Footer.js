@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className='h-[400px] sticky top-[calc(100vh-400px)] bg-darkBlueLight text-textSecondary py-6'>
           <div className='container mx-auto text-center' style={{paddingTop: '100px'}}>
             <div className='space-y-4'>
-              <p> Made with ❤️ in India.</p>
+              <p> Made with ❤️ on Earth 🌎 </p>
               <p>1234 Imaginary Street, Fictionland, FS, 12345</p>
               <p>Email: kalyanguru18@gmail.com</p>
             </div>
