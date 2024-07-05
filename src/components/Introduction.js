@@ -11,14 +11,10 @@ export default function Introduction() {
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               <span className="gradient-text">Kalyan</span>
             </h1>
-            <h2 className="text-2xl font-semibold text-lightBlue">AI Researcher & Developer</h2>
+            <h2 className="text-2xl font-semibold text-lightBlue">I like to do research and build things.</h2>
             <p className="text-textSecondary text-lg">
-              I’m a 4th-year undergraduate at Amrita University with a keen interest in computer vision and visual learning models.
-              I enjoy tinkering around ideas and push myself to build applications using Flutter, totally not a waste of time and am actively involved in research, particularly focusing on VLMs (not entierly LLMs) and Vision tasks.
-            </p>
-            <p className="text-textSecondary text-lg">
-              I believe in the power of AI to transform industries and improve lives. But now-a-days getting fed-up with the current space of AI hype, I mean imagine seeing updates only about LLMs everywhere.
-              I also like to watch random videos of Karpathy, because why not ¯\_(ツ)_/¯.
+            As a 4th-year undergraduate at Amrita University, I have been involved in several valuable technical activities and groundbreaking research work aligned with my interests, particularly in computer vision. My current research focuses on Vision Language Models (VLMs) and related vision tasks.
+            From a birds-eye view, I am fascinated by the process of AI evolving into an increasingly sophisticated knowledge cortex. I am curious to see the aftermath of this AI plateau and where it will lead us next.
             </p>
           </div>
           <div className="flex flex-col items-center justify-center mt-8 md:mt-0">
