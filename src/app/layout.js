@@ -17,7 +17,7 @@ const fontBody = Manrope({
   display: 'swap',
   variable: '--font-body',
 });
-
+ 
 export default function Layout({ children }) {
   return (
     <html lang="en">
