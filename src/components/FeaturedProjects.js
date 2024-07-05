@@ -28,7 +28,7 @@ export default function FeaturedProjects() {
     {
       title: "MedGPT - Medical Android App",
       description: "An flutter app which was used to facilitate research @ AIMS Kochi. The app was used to facilitate continuous dialogues, diagnoses, and treatment planning.",
-      url: "sekrit"
+      url: "https://www.kommunicate.io/blog/wp-content/uploads/2022/12/10-Best-Chatbot-Apps-for-Android-and-iOS.png"
     },
   ];
 
