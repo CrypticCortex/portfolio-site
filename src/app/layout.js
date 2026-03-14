@@ -1,36 +1,35 @@
-// src/app/Layout.js
-import React from 'react';
-import { Manrope } from 'next/font/google';
-import { cn } from '@/lib/utils';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import '../styles/globals.css';
+import { Inter, JetBrains_Mono } from "next/font/google";
+import "../styles/globals.css";
 
-const fontHeading = Manrope({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-heading',
+const fontSans = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
 });
 
-const fontBody = Manrope({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-body',
+const fontMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-mono",
 });
- 
-export default function Layout({ children }) {
+
+export const metadata = {
+  title: "kalyan",
+  description: "Software Engineer I at Guidewire. Building agentic systems, shipping automation tools, publishing papers.",
+};
+
+export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={cn(
-          'antialiased',
-          fontHeading.variable,
-          fontBody.variable
-        )}
-      >
-        <Header />
+    <html lang="en" className={`${fontSans.variable} ${fontMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var t=localStorage.getItem("theme");if(t==="light")document.documentElement.classList.add("light");})();`,
+          }}
+        />
+      </head>
+      <body className="antialiased">
         {children}
-        <Footer />
       </body>
     </html>
   );
