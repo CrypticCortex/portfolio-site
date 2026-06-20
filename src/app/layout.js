@@ -14,8 +14,17 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "kalyan",
-  description: "Software Engineer I at Guidewire. Building agentic systems, shipping automation tools, publishing papers.",
+  title: "Kalyan -- AI Engineer",
+  description:
+    "AI engineer building agentic LLM systems in production at Guidewire. Eval harnesses, not vibes. Published research and open-source contributions to AI infrastructure.",
+  keywords: ["AI Engineer", "LLM", "agentic systems", "MLOps", "evals", "RAG", "MCP", "Guidewire"],
+  openGraph: {
+    title: "Kalyan -- AI Engineer",
+    description:
+      "Agentic LLM systems in production, proven with eval harnesses. Research + merged open-source contributions.",
+    url: "https://crypticcortex.vercel.app",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {

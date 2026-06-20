@@ -4,10 +4,16 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, useInView, useScroll, useSpring, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import {
   meta,
+  hero,
+  experienceIntro,
+  contact,
   experiences,
+  capabilities,
   projects,
   papers,
+  papersSummary,
   skillCategories,
+  skills,
   achievements,
   education,
 } from "@/lib/data";
@@ -1113,6 +1119,7 @@ function SideNav({ activeSection, C, isDark, onToggleTheme }) {
   const sections = [
     { label: "Experience", id: "experience" },
     { label: "Lab", id: "projects" },
+    { label: "Open Source", id: "opensource" },
     { label: "Research", id: "research" },
     { label: "Stack", id: "skills" },
     { label: "Contact", id: "connect" },
@@ -1194,6 +1201,7 @@ function MobileNav({ activeSection, C, isDark, onToggleTheme }) {
   const sections = [
     { label: "Exp", id: "experience" },
     { label: "Lab", id: "projects" },
+    { label: "OSS", id: "opensource" },
     { label: "Res", id: "research" },
     { label: "Stack", id: "skills" },
     { label: "Contact", id: "connect" },
@@ -1273,7 +1281,7 @@ function Section({ id, children, className = "", bgColor }) {
 
 
 // -- Section header (Apple-style wipe reveal) --
-function SectionHeader({ label, C }) {
+function SectionHeader({ label, C, center }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   return (
@@ -1294,7 +1302,7 @@ function SectionHeader({ label, C }) {
         initial={{ scaleX: 0 }}
         animate={inView ? { scaleX: 1 } : {}}
         transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className="h-px mt-4 origin-left"
+        className={`h-px mt-4 ${center ? "mx-auto origin-center" : "origin-left"}`}
         style={{ background: C.accent, width: 48 }}
       />
     </motion.div>
@@ -1334,6 +1342,98 @@ function StatBox({ label, value, inView, C }) {
 }
 
 
+// -- Open Source section (live from GitHub, never hardcoded) --
+function OpenSourceSection({ C, isDark }) {
+  const [state, setState] = useState({ loading: true, items: [], mergedCount: 0, openCount: 0, error: null });
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/oss")
+      .then((r) => r.json())
+      .then((d) => {
+        if (active) setState({ loading: false, items: d.items || [], mergedCount: d.mergedCount || 0, openCount: d.openCount || 0, error: d.error || null });
+      })
+      .catch((e) => {
+        if (active) setState({ loading: false, items: [], mergedCount: 0, openCount: 0, error: e.message });
+      });
+    return () => { active = false; };
+  }, []);
+
+  const { loading, items, mergedCount, error } = state;
+
+  return (
+    <Section id="opensource" className="py-24 px-8 md:px-16 lg:px-24" bgColor={C.researchBg}>
+      <div className="max-w-4xl mx-auto">
+        <SectionHeader label="Open Source" C={C} />
+
+        <p className="text-sm mb-8" style={{ fontFamily: "var(--font-mono)", color: C.muted }}>
+          {loading
+            ? "fetching live from github..."
+            : error
+            ? "contributions on github.com/" + "CrypticCortex"
+            : mergedCount + (mergedCount === 1 ? " merged contribution \u00b7 live from github" : " merged contributions \u00b7 live from github")}
+        </p>
+
+        {!loading && !error && items.length > 0 && (
+          <div className="space-y-3">
+            {items.map((pr) => (
+              <motion.a
+                key={pr.url}
+                href={pr.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+                whileHover={{ x: 4, transition: { duration: 0.2 } }}
+                className="flex items-baseline gap-4 p-4 rounded-lg border"
+                style={{
+                  background: isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)",
+                  borderColor: C.divider,
+                  textDecoration: "none",
+                }}
+              >
+                <span
+                  className="text-xs px-2 py-0.5 rounded shrink-0"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: 10,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                    background: pr.status === "merged" ? "rgba(74,222,128,0.1)" : C.tagBg,
+                    color: pr.status === "merged" ? "#4ade80" : C.accent,
+                  }}
+                >
+                  {pr.status}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm truncate" style={{ color: C.text }}>
+                    {pr.title}
+                  </div>
+                  <div className="text-xs mt-1" style={{ fontFamily: "var(--font-mono)", color: C.muted }}>
+                    {pr.fullName} {"\u00b7"} #{pr.number} {"\u00b7"} {pr.when}
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        )}
+
+        {!loading && (error || items.length === 0) && (
+          <p className="text-sm" style={{ color: C.muted }}>
+            See contributions on{" "}
+            <a href={"https://github.com/CrypticCortex"} target="_blank" rel="noopener noreferrer" style={{ color: C.accent }}>
+              github.com/CrypticCortex {"->"}
+            </a>
+          </p>
+        )}
+      </div>
+    </Section>
+  );
+}
+
+
 // ============================
 // Main page
 // ============================
@@ -1344,7 +1444,7 @@ export default function Home() {
 
   // Track active section
   useEffect(() => {
-    const ids = ["experience", "projects", "research", "skills", "connect"];
+    const ids = ["experience", "projects", "opensource", "research", "skills", "connect"];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -1373,7 +1473,7 @@ export default function Home() {
   const heroSubY = useTransform(heroProgress, [0, 1], [0, -60]);
   const heroTagY = useTransform(heroProgress, [0, 1], [0, -30]);
 
-  const heroWords = ["Software Engineer.", "Researcher.", "Builder."];
+  const heroWords = hero.words;
 
   return (
     <main style={{ background: C.bg, color: C.text, minHeight: "100vh", transition: "background 0.4s, color 0.4s" }}>
@@ -1426,11 +1526,12 @@ export default function Home() {
           className="mt-8 text-sm max-w-md"
           style={{ fontFamily: "var(--font-mono)", color: C.muted, lineHeight: 1.6, y: heroTagY }}
         >
-          navigating the void between idea and implementation --
-          <br />
-          solving existential bugs in the fabric of reality,
-          <br />
-          one commit at a time.
+          {hero.tagline.map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < hero.tagline.length - 1 && <br />}
+            </span>
+          ))}
         </motion.p>
 
         {/* HUD: clock + location */}
@@ -1475,9 +1576,7 @@ export default function Home() {
             className="text-lg font-light leading-relaxed mb-16 max-w-2xl"
             style={{ color: C.muted, fontFamily: "var(--font-sans)" }}
           >
-            From university research labs to production systems at Guidewire -- a path
-            shaped by curiosity about what machines can learn and a bias toward shipping
-            things that work.
+            {experienceIntro}
           </motion.p>
 
           <motion.div
@@ -1520,6 +1619,43 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* ===== CAPABILITIES ===== */}
+      <Section id="capabilities" className="py-24 px-8 md:px-16 lg:px-24" bgColor={C.researchBg}>
+        <div className="max-w-5xl mx-auto">
+          <SectionHeader label="What I Do" C={C} />
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          >
+            {capabilities.map((cap, i) => (
+              <motion.div
+                key={i}
+                variants={scaleUp}
+                className="p-5 rounded-lg border"
+                style={{
+                  background: isDark ? "rgba(255,255,255,0.02)" : "rgba(0,0,0,0.02)",
+                  borderColor: C.divider,
+                }}
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span style={{ color: C.accent, fontSize: 14 }}>{"//>"}</span>
+                  <h3 className="text-sm font-medium" style={{ color: C.text }}>
+                    {cap.title}
+                  </h3>
+                </div>
+                <p className="text-xs leading-relaxed" style={{ color: C.muted }}>
+                  {cap.desc}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -1615,6 +1751,9 @@ export default function Home() {
         </div>
       </Section>
 
+      {/* ===== OPEN SOURCE (live) ===== */}
+      <OpenSourceSection C={C} isDark={isDark} />
+
       {/* ===== RESEARCH ===== */}
       <Section
         id="research"
@@ -1623,6 +1762,10 @@ export default function Home() {
       >
         <div className="max-w-4xl mx-auto">
           <SectionHeader label="Research" C={C} />
+
+          <p className="text-sm mb-8" style={{ fontFamily: "var(--font-mono)", color: C.muted }}>
+            {papersSummary}
+          </p>
 
           <div className="space-y-5">
             {papers.map((paper, i) => (
@@ -1719,15 +1862,7 @@ export default function Home() {
               className="flex flex-wrap gap-2 content-start"
               style={{ fontFamily: "var(--font-mono)" }}
             >
-              {[
-                "Python", "TypeScript", "JavaScript", "Dart", "SQL",
-                "React", "Next.js", "Flutter", "Tailwind",
-                "FastAPI", "Node.js", "PostgreSQL", "Redis", "Supabase",
-                "LangChain", "LangGraph", "OpenAI", "RAG",
-                "PyTorch", "HuggingFace", "Transformers",
-                "AWS", "Azure", "Vercel", "Docker",
-                "Git", "Linux", "GSAP", "Framer Motion",
-              ].map((t) => (
+              {skills.map((t) => (
                 <motion.span
                   key={t}
                   variants={{
@@ -1804,7 +1939,7 @@ export default function Home() {
       {/* ===== CONTACT ===== */}
       <Section id="connect" className="py-24 px-8 md:px-16 lg:px-24" bgColor="transparent">
         <div className="max-w-4xl mx-auto text-center">
-          <SectionHeader label="Contact" C={C} />
+          <SectionHeader label="Contact" C={C} center />
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -1814,7 +1949,7 @@ export default function Home() {
             className="text-3xl md:text-4xl font-light tracking-tight mb-10"
             style={{ color: C.text }}
           >
-            {"Let's build something."}
+            {contact.heading}
           </motion.h2>
 
           <motion.div
