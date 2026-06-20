@@ -90,7 +90,7 @@ derived from profile.yml. Do these next; do not start a redesign instead.
 4. ~~Swap Guidewire feature-lists for outcome metrics from cv.md~~ DONE
    (latency 30s->21s, multi-judge eval 5x5x5 95% CI, LLM-out-of-booking FSM).
    Hexon bullet also reframed to the ~20% cost-cut outcome.
-5. PENDING: MedGPT 30->80% -- verify before keeping prominent (awaiting Kalyan).
+5. DONE: MedGPT 30->80% verified true by Kalyan (2026-06-20); stays prominent.
    Papers: site shows 5 published + 1 underway; cv.md/profile.yml say 6 published.
    Site stays conservative (5+1) until the 6th is confirmed published.
 6. PENDING: availability line + CV PDF link in hero/contact.
