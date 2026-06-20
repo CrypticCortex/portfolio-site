@@ -43,8 +43,8 @@ export const experiences = [
       "Cut LLM claim-summarization latency materially by tracing every capture point end to end and slimming payloads",
       "Built a multi-judge LLM eval framework: 5 judge models across 5 families, 5 metrics per field, 95% confidence intervals, automated HTML reports",
       "Shipped a production claim-summarization agent end to end -- data model, persistence, sync REST API, event-trigger wiring",
-      "Built a stateful Slack-to-ServiceNow scheduling agent, then took the LLM out of the booking path -- a deterministic FSM replaced a stall-prone LLM step so irreversible actions can't misfire",
-      "Range: real-time voice claims-intake prototype, a reusable voice (MCP) capability adopted by other teams, and a team-adopted AI-engineering competency framework",
+      "Built and shipped a production event-scheduling agent end to end -- Slack intake, scheduling, room/resource booking, ServiceNow ticketing, reminders, and feedback -- as a stateful LangGraph workflow (FastAPI + Postgres)",
+      "Range: a real-time voice claims-intake prototype, a voice (MCP) capability merged into the AI developer platform, and an AI-engineering competency framework I authored",
     ],
   },
   {
