@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local-only / never publish (private notes, internal refs, agent junk)
+docs/PORTFOLIO.md
+docs/plans/
+claude-entity/
+.playwright-mcp/

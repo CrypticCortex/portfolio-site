@@ -44,7 +44,7 @@ export const experiences = [
       "Built a multi-judge LLM eval framework: 5 judge models across 5 families, 5 metrics per field, 95% confidence intervals, automated HTML reports",
       "Shipped a production claim-summarization agent end to end -- data model, persistence, sync REST API, event-trigger wiring",
       "Built a stateful Slack-to-ServiceNow scheduling agent, then took the LLM out of the booking path -- a deterministic FSM replaced a stall-prone LLM step so irreversible actions can't misfire",
-      "Range: real-time voice claims-intake prototype, a voice MCP capability merged into the developer platform, and a team-adopted AI-engineering competency framework",
+      "Range: real-time voice claims-intake prototype, a reusable voice (MCP) capability adopted by other teams, and a team-adopted AI-engineering competency framework",
     ],
   },
   {
@@ -139,15 +139,15 @@ export const papers = [
 export const capabilities = [
   {
     title: "Agent Architectures",
-    desc: "Multi-agent orchestration, tool use, memory, voice pipelines. LangGraph, agent SDK, Claude Code agents.",
+    desc: "Multi-agent orchestration, tool use, memory, voice pipelines. LangGraph, MCP, Claude Code agents.",
   },
   {
     title: "AI Evaluation & Quality",
-    desc: "Eval frameworks, prompt versioning, LLM-as-judge, CI/CD for agents. promptfoo, eval harness, 37/37 adaptive scenarios.",
+    desc: "Eval frameworks, prompt versioning, LLM-as-judge, CI/CD for agents. promptfoo, multi-judge eval harnesses, anchored rubrics with confidence intervals.",
   },
   {
     title: "Enterprise AI Integration",
-    desc: "MCP servers, enterprise knowledge search, insurance claim processing. enterprise search, InsuranceNow, ClaimsCenter APIs.",
+    desc: "MCP servers, enterprise knowledge search, insurance claim processing. ClaimCenter and InsuranceNow integrations.",
   },
   {
     title: "Cognitive Tooling",
@@ -159,7 +159,7 @@ export const capabilities = [
   },
   {
     title: "Workshops & Enablement",
-    desc: "agent-building workshop (3 agent types), AI Agents & MCPs tech talk, ML Bootcamp co-lead (500+ participants).",
+    desc: "Agent-building workshop (3 agent types), AI Agents & MCPs tech talk, ML Bootcamp co-lead (500+ participants).",
   },
 ];
 
