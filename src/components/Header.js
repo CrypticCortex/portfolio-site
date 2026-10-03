@@ -4,12 +4,11 @@ import Link from "next/link";
 
 const links = [
   ["/", "Home"],
-  ["/education", "Education"],
+  ["/#experience", "Experience"],
+  ["/#work", "Projects"],
   ["/research", "Research"],
-  ["/what-i-can-do", "Conversation starters"],
-  ["https://github.com/CrypticCortex", "Projects"],
-  ["https://aghoraguru.github.io/", "Blog"],
-  ["https://www.linkedin.com/in/crypticcortex/details/experience/", "Experience"],
+  ["/stack", "Stack"],
+  ["/education", "Education"],
 ];
 
 export default function Header() {
