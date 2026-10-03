@@ -16,6 +16,9 @@ export const metadata = {
 export default function Layout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('ay-seen'))document.documentElement.dataset.seen='1'}catch(e){}" }} />
+      </head>
       <body className={cn('antialiased', fontHeading.variable, fontBody.variable)}>
         <Header />
         <main>{children}</main>

@@ -13,12 +13,16 @@ export default function Preloader({ done }) {
   }, [index]);
   useEffect(() => {
     if (!done) return;
-    const t = setTimeout(() => setGone(true), 700);
+    const t = setTimeout(() => {
+      setGone(true);
+      try { sessionStorage.setItem('ay-seen', '1'); } catch {}
+      document.documentElement.dataset.seen = '1';
+    }, 700);
     return () => clearTimeout(t);
   }, [done]);
   if (gone) return null;
   return (
-    <div className={`fixed inset-0 z-[1000] flex items-center justify-center bg-maroon transition-opacity duration-700 ${done ? 'pointer-events-none opacity-0' : 'opacity-100'}`}>
+    <div className={`preloader-root fixed inset-0 z-[1000] flex items-center justify-center bg-maroon transition-opacity duration-700 ${done ? 'pointer-events-none opacity-0' : 'opacity-100'}`}>
       <div className="absolute inset-6 border border-gold/70" />
       <h1 className="rise font-serif text-4xl font-bold text-paper sm:text-5xl" key={index}>{words[index]}</h1>
     </div>

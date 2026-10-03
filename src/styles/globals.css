@@ -35,3 +35,5 @@
 .drift { animation: drift 90s ease-in-out infinite alternate; }
 .rise { animation: rise .8s ease both; }
 @media (prefers-reduced-motion: reduce) { .drift, .rise { animation: none; } }
+
+html[data-seen] .preloader-root { display: none; }
