@@ -1,56 +1,48 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
+const links = [
+  ["/", "Home"],
+  ["/education", "Education"],
+  ["/research", "Research"],
+  ["/what-i-can-do", "Conversation starters"],
+  ["https://github.com/CrypticCortex", "Projects"],
+  ["https://aghoraguru.github.io/", "Blog"],
+  ["https://www.linkedin.com/in/crypticcortex/details/experience/", "Experience"],
+];
+
 export default function Header() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const headerHeight = Math.max(40, 50 - scrollY * 0.1);
-
+  const [open, setOpen] = useState(false);
   return (
-    <header
-      className="fixed top-0 w-full transition-all duration-300 z-50 bg-opacity-80 backdrop-blur-md"
-      style={{
-        height: `${headerHeight}px`,
-        backgroundColor: 'rgba(30, 41, 59, 0.8)',
-      }}
-    >
-      <div className="container mx-auto h-full flex justify-center items-center px-2 md:px-4">
-        <nav
-          className="flex space-x-2 text-sm"
-          aria-label="Main Navigation"
-        >
-          <CustomLink href="/" label="Home" />
-          <CustomLink href="/education" label="Education" />
-          <CustomLink href="https://github.com/CrypticCortex" label="Projects" />
-          <CustomLink href="/what-i-can-do" label="Conversation Starters" />
-          <CustomLink href="/research" label="Research" />
-          <CustomLink href="https://aghoraguru.github.io/" label="Blog" />
-          <CustomLink href="https://www.linkedin.com/in/crypticcortex/details/experience/" label="Experience" />
-          <CustomLink href="mailto:kalyanguru18@gmail.com" label="Talk?" />
-
-        </nav>
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3">
+      <div className="w-full max-w-5xl rounded-full border border-[#e2d6bd] bg-paper/85 px-4 py-2 shadow-[0_4px_24px_rgba(122,26,42,.12)] backdrop-blur-md">
+        <div className="flex items-center justify-between gap-4">
+          <Link href="/" className="font-serif text-lg font-bold text-maroon" aria-label="Home">
+            कल्याण <span className="hidden text-sm font-semibold text-mute sm:inline">· Kalyan</span>
+          </Link>
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+            {links.map(([href, label]) => <NavLink key={label} href={href} label={label} />)}
+            <a href="mailto:kalyanguru18@gmail.com" className="btn ml-2 !py-1.5">Talk?</a>
+          </nav>
+          <button className="rounded-full px-3 py-1 text-sm font-semibold text-maroon lg:hidden" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Menu">
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
+        {open && (
+          <nav className="mt-2 flex flex-col gap-1 pb-2 lg:hidden" aria-label="Mobile navigation" onClick={() => setOpen(false)}>
+            {links.map(([href, label]) => <NavLink key={label} href={href} label={label} />)}
+            <a href="mailto:kalyanguru18@gmail.com" className="btn mt-1 justify-center">Talk?</a>
+          </nav>
+        )}
       </div>
     </header>
   );
 }
 
-function CustomLink({ href, label }) {
+function NavLink({ href, label }) {
   return (
-    <Link
-      href={href}
-      className="header-link focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-textPrimary px-2 py-1 rounded-full hover:bg-darkBlueLight transition-colors duration-300"
-    >
+    <Link href={href} className="rounded-full px-3 py-1.5 text-sm font-semibold text-mute transition hover:bg-paper2 hover:text-maroon focus:outline-none focus-visible:ring-2 focus-visible:ring-maroon">
       {label}
     </Link>
   );

@@ -1,51 +1,37 @@
-// src/components/Skills.js
-import React from 'react';
 import Link from 'next/link';
-import AnimatedButton from './AnimatedButton';
-const skillCategories = [
-  {
-    name: "Machine Learning",
-    description: "Why? The inherent math behind ML models are just soo interesting."
-  },
-  {
-    name: "Deep Learning",
-    description: "Why? Though it's labbeled as a black box, I find it as a representation of human brain."
-  },
-  {
-    name: "NeRF",
-    description: "Why? The idea of reconstructing 3D scenes from 2D images is just mind-blowing. And I love taking pictures so one day hoping to build my own 3D model."
-  },
-  {
-    name: "Android Development",
-    description: "Why? Well, you have model which works perfectly, but inference of models are only for nerds. I feel there is an gap that needs to be bridged."
-  }
+import Scallop from './Scallop';
+
+const items = [
+  ["Machine Learning", "The maths hiding inside ML models is endlessly interesting."],
+  ["Deep Learning", "Called a black box, but I see it as a small mirror of the human brain."],
+  ["NeRF", "Rebuilding 3D scenes from 2D photographs is mind-blowing — and I love taking pictures, so one day I hope to build my own 3D model."],
+  ["Android development", "A model that works perfectly is only half the story; I want to bridge the gap between inference and people."],
 ];
 
-const SkillCategory = ({ name, description }) => (
-  <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
-    <h3 className="text-xl font-semibold text-white mb-2">{name}</h3>
-    <p className="text-gray-300">{description}</p>
-  </div>
-);
-
-export default function SimpleSkills() {
+export default function Skills() {
   return (
-    <section className="bg-darkBlueLight py-5">
-      <div className="container mx-auto max-w-6xl px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight text-white mb-4">What Im Usually upto</h2>
+    <>
+      <Scallop from="#f7f0e0" to="#efe4cb" />
+      <section className="bg-paper2 px-4 py-20 md:px-6">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 text-center">
+            <p className="eyebrow">Curiosities</p>
+            <h2 className="mt-2 text-3xl font-bold text-maroon sm:text-4xl">What I&apos;m usually up to</h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {items.map(([name, why], i) => (
+              <div key={name} className="paper-card flex gap-4 p-6">
+                <span className="font-serif text-4xl font-bold leading-none text-gold">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 className="text-xl font-bold text-maroon">{name}</h3>
+                  <p className="mt-1 leading-relaxed text-mute">{why}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 text-center"><Link href="/what-i-can-do" className="btn-ghost">All conversation starters →</Link></div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {skillCategories.map((category, index) => (
-            <SkillCategory key={index} {...category} />
-          ))}
-        </div>
-        <div className="text-center">
-          <Link href="/what-i-can-do">
-              <AnimatedButton>View All Interests</AnimatedButton>
-          </Link>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

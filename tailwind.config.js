@@ -8,10 +8,17 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['var(--font-heading)', ...fontFamily.sans],
+        heading: ['var(--font-heading)', ...fontFamily.serif],
         body: ['var(--font-body)', ...fontFamily.sans],
+        serif: ['var(--font-heading)', ...fontFamily.serif],
       },
       colors: {
+        paper: '#f7f0e0',
+        paper2: '#efe4cb',
+        maroon: { DEFAULT: '#7a1a2a', light: '#932233' },
+        gold: { DEFAULT: '#d9a826', dark: '#9a7410' },
+        ink: '#2b1d16',
+        mute: '#6b5a48',
         darkBlue: '#1e293b',
         lightBlue: '#94a3b8',
         textPrimary: '#e2e8f0',
