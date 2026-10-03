@@ -3,7 +3,7 @@ export const profile = {
   name: 'Kalyan',
   native: 'कल्याण',
   title: 'Software Engineer I',
-  tagline: ['AI Engineer.', 'Researcher.', 'Builder.'],
+  tagline: ['Software × AI.', 'Researcher.', 'Builder.'],
   bio: 'research papers before graduation, production AI after — I build systems that think, remember, and ship. everything else is configuration.',
   location: 'Bangalore, IN',
   email: 'kalyanguru18@gmail.com',

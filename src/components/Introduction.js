@@ -13,6 +13,7 @@ export default function Introduction() {
             <p className="eyebrow">{profile.native} · {profile.location}</p>
             <h1 className="text-5xl font-bold tracking-tight text-maroon sm:text-6xl lg:text-7xl">{profile.name}</h1>
             <h2 className="text-2xl font-semibold text-ink/80">{profile.tagline.join(' ')}</h2>
+            <p className="-mt-3 text-sm font-semibold uppercase tracking-widest text-gold-dark">{profile.title} at Guidewire · where AI meets software</p>
             <p className="max-w-prose text-lg leading-relaxed text-mute">{profile.bio}</p>
             <div className="flex flex-wrap gap-3 pt-1">
               <a href="#work" className="btn">Selected work ↓</a>
