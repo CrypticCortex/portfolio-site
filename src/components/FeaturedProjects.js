@@ -14,7 +14,7 @@ export default function FeaturedProjects() {
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((p) => (
-              <article key={p.name} className={`paper-card flex flex-col gap-3 p-6 transition hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(122,26,42,.18)] ${p.featured ? 'ring-2 ring-gold md:col-span-1' : ''}`}>
+              <article key={p.name} className={`paper-card flex flex-col gap-3 p-5 transition sm:p-6 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(122,26,42,.18)] ${p.featured ? 'ring-2 ring-gold md:col-span-1' : ''}`}>
                 <div className="flex items-center gap-2">
                   <h3 className="text-2xl font-bold text-maroon">{p.name}</h3>
                   {p.featured && <span className="chip !bg-gold !text-ink">Featured</span>}
