@@ -10,7 +10,7 @@ const fontBody = Noto_Sans({ subsets: ['latin'], display: 'swap', variable: '--f
 
 export const metadata = {
   title: 'Kalyan · AI Engineer. Researcher. Builder.',
-  description: 'Kalyan — AI engineer at Guidewire, Bangalore. Agents, evaluation, MCP, medical and sonar vision research.',
+  description: 'Kalyan — Software Engineer I at Guidewire, Bangalore, building AI agents. Agents, evaluation, MCP, medical and sonar vision research.',
 };
 
 export default function Layout({ children }) {

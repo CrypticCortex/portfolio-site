@@ -2,7 +2,7 @@
 export const profile = {
   name: 'Kalyan',
   native: 'कल्याण',
-  title: 'AI Engineer',
+  title: 'Software Engineer I',
   tagline: ['AI Engineer.', 'Researcher.', 'Builder.'],
   bio: 'research papers before graduation, production AI after — I build systems that think, remember, and ship. everything else is configuration.',
   location: 'Bangalore, IN',
@@ -12,7 +12,7 @@ export const profile = {
 };
 
 export const experience = [
-  { role: 'AI Engineer', org: 'Guidewire', when: 'Feb 2025 – present', points: [
+  { role: 'Software Engineer I', org: 'Guidewire', when: 'Feb 2025 – present', points: [
     'Reduced LLM claim-summarization latency through end-to-end payload optimization.',
     'Developed a multi-judge LLM evaluation framework (5 models, 5 metrics per field, 95% confidence intervals).',
     'Shipped a production claim-summarization agent with data model, persistence and REST API.',
