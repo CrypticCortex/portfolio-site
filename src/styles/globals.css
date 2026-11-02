@@ -1,6 +1,9 @@
 /* Hallmark · redesign: full · genre: editorial · theme: riso (deal: manual, chosen for textured print imagery) · job: hire · hero: Stage · nav: edge-aligned bar · footer: photograph close (Bangalore) + colophon · posture: committed · signature: Kalyan's portrait pulled in two drums, the pink silhouette a hair off register · imagery: photographs, library 3 + Commons 1 (Vidhana Soudha), duotone ink paper-2, grain baked in · waive 38iii (the misregistered word, once, hero) · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V5 · weakest: S, the library photos are stand-ins for Kalyan's own; each sits on a chapter it names (memory, voice, research) and swaps by file */
 
+@font-face { font-family: "Cabinet Grotesk"; src: url("/fonts/cabinet-grotesk-800.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cabinet Fallback"; src: local("Arial Bold"), local("Arial"); font-weight: 800; size-adjust: 96%; ascent-override: 92%; descent-override: 24%; }
+
 :root {
   /* the two drums and the stock */
   --color-paper: oklch(97% 0.011 90); --color-paper-2: oklch(93.5% 0.034 356); --color-paper-3: oklch(84% 0.11 356);
@@ -8,7 +11,7 @@
   --color-rule: oklch(85% 0.045 265);
   --color-accent: oklch(68% 0.235 356); --color-accent-ink: oklch(27% 0.13 265); --color-focus: oklch(44% 0.2 265);
 
-  --font-display: "Cabinet Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cabinet Grotesk", "Cabinet Fallback", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Literata", ui-serif, Georgia, serif;
   --display-weight: 800; --tracking-display: -0.025em;
 
@@ -253,4 +256,53 @@ time, .nums { font-variant-numeric: tabular-nums lining-nums; }
   .misreg::after { animation: none; }
   .btn, a { transition: none; }
   .btn:active { transform: none; }
+}
+
+/* ---------- attention pass ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* hero portrait: two drums, the pink lands a hair off register on load */
+.plate { position: relative; aspect-ratio: 4 / 5; isolation: isolate; overflow: hidden; border-bottom: var(--rule-ink) solid var(--color-ink); }
+.plate img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; object-position: 50% 100%; background: none; border: 0; }
+.plate__blue { animation: drum-blue var(--dur-long) var(--ease-out) both; }
+.plate__pink { mix-blend-mode: multiply; transform: translate(1.6%, 0.9%); animation: drum-pink 560ms var(--ease-out) 240ms both; }
+@keyframes drum-blue { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes drum-pink { from { opacity: 0; transform: translate(-7%, 0.9%); } to { opacity: 1; transform: translate(1.6%, 0.9%); } }
+
+/* stack ticker: the pink drum printed solid, words run past */
+.ticker { position: relative; display: flex; align-items: center; background: var(--color-accent); color: var(--color-accent-ink); border-block: var(--rule-ink) solid var(--color-ink); }
+.ticker__window { flex: 1; min-width: 0; overflow: hidden; }
+.ticker__track { display: flex; width: max-content; animation: ticker 60s linear infinite; }
+.ticker li { display: flex; align-items: center; gap: var(--space-lg); padding: var(--space-md) 0 var(--space-md) var(--space-lg); font: var(--display-weight) clamp(1.375rem, 2.4vw, 2rem)/1 var(--font-display); letter-spacing: -0.02em; white-space: nowrap; }
+.ticker li i { width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--color-ink); mix-blend-mode: multiply; }
+.ticker:hover .ticker__track, .ticker:focus-within .ticker__track, .ticker[data-paused="true"] .ticker__track { animation-play-state: paused; }
+.ticker__toggle { flex-shrink: 0; align-self: stretch; min-width: 88px; padding: 0 var(--space-md); border: 0; border-left: var(--rule-ink) solid var(--color-ink); background: var(--color-paper); color: var(--color-ink); font: var(--display-weight) var(--text-sm)/1 var(--font-display); cursor: pointer; transition: background-color var(--dur-short) var(--ease-out); }
+.ticker__toggle:hover { background: var(--color-paper-2); }
+.ticker__toggle:active { transform: translate(1px, 1px); }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* the reading: one measured result set at poster size */
+.head--reading { align-items: center; }
+.reading { display: grid; justify-items: start; }
+.reading__was { font: var(--display-weight) var(--text-display-s)/1 var(--font-display); color: var(--color-muted); letter-spacing: -0.03em; }
+.reading__was s { text-decoration-color: var(--color-accent); text-decoration-thickness: 0.12em; }
+.reading__now { position: relative; isolation: isolate; font: var(--display-weight) clamp(6rem, 15vw, 13rem)/0.82 var(--font-display); letter-spacing: -0.05em; margin-bottom: var(--space-md); }
+.reading__now::before { content: ""; position: absolute; z-index: 1; left: 30%; top: 8%; width: 0.7em; height: 0.7em; border-radius: 50%; background: var(--color-accent); mix-blend-mode: multiply; pointer-events: none; }
+.reading .label { max-width: 32ch; }
+
+/* the record on a light pink screen: a change of paper breaks the long text run */
+.screen { margin-top: var(--section-gap); padding-block: var(--section-gap-s); background: var(--color-paper-2); }
+.screen .trail > li { border-top-color: var(--color-paper-3); }
+.screen .trail > li:first-child { border-top-color: var(--color-ink); }
+.screen + .section { padding-top: var(--section-gap); }
+
+/* prize dots land as they scroll in (browsers with scroll timelines; static elsewhere) */
+@supports (animation-timeline: view()) {
+  .figure__num::before { animation: land linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
+  @keyframes land { from { opacity: 0; transform: translate(-60%, -40%) scale(0.3); } to { opacity: 1; transform: none; } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate__blue, .plate__pink, .ticker__track, .figure__num::before { animation: none !important; }
+  .ticker__window { overflow-x: auto; }
 }

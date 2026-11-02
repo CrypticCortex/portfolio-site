@@ -1,6 +1,8 @@
 import Image from 'next/image';
-import { profile, experience, projects, publications, competencies, achievements } from '@/data/profile';
-import portrait from '../../public/print/kalyan.webp';
+import Ticker from '@/components/Ticker';
+import { profile, experience, projects, publications, achievements, stack } from '@/data/profile';
+import portraitBlue from '../../public/print/kalyan-blue.webp';
+import portraitPink from '../../public/print/kalyan-pink.webp';
 import memory from '../../public/print/memory.webp';
 import voice from '../../public/print/voice.webp';
 import microscope from '../../public/print/research.webp';
@@ -20,6 +22,7 @@ function Entry({ p, lead = false }) {
 
 export default function Home() {
   const more = ['MedGPT', 'Kanaku', 'SheLaw', 'JobScrapper'].map(byName);
+  const tools = [...new Set(stack.flatMap(([, items]) => items))];
   const [first, second, sixth, organizer, bootcamp, certified] = achievements;
   return (
     <>
@@ -35,11 +38,16 @@ export default function Home() {
             </div>
           </div>
           <figure className="pull">
-            <Image src={portrait} alt="Portrait of Kalyan" priority sizes="(max-width: 60rem) 360px, 40vw" placeholder="empty" />
+            <div className="plate" role="img" aria-label="Portrait of Kalyan">
+              <Image className="plate__blue" src={portraitBlue} alt="" priority sizes="(max-width: 60rem) 360px, 40vw" />
+              <Image className="plate__pink" src={portraitPink} alt="" priority sizes="(max-width: 60rem) 360px, 40vw" />
+            </div>
             <figcaption className="label">Kalyan, printed in two drums.</figcaption>
           </figure>
         </div>
       </section>
+
+      <Ticker items={tools} />
 
       {/* memory: showcase */}
       <section className="section" id="work" aria-labelledby="memory-title">
@@ -83,8 +91,13 @@ export default function Home() {
       {/* more work: index */}
       <section className="section" aria-labelledby="more-title">
         <div className="container">
-          <div className="head">
+          <div className="head head--reading">
             <h2 id="more-title">For hospitals, shops and courts</h2>
+            <div className="reading">
+              <p className="reading__was"><s>30%</s> <span className="sr-only">to</span></p>
+              <p className="reading__now nums">80%</p>
+              <p className="label">MedGPT diagnostic accuracy, up from 30%. Deployed at AIMS Kochi Hospital.</p>
+            </div>
           </div>
           <ol className="index">
             {more.map((p) => (
@@ -102,7 +115,7 @@ export default function Home() {
       </section>
 
       {/* record: trail */}
-      <section className="section section--l" id="record" aria-labelledby="record-title">
+      <section className="screen" id="record" aria-labelledby="record-title">
         <div className="container">
           <div className="head">
             <h2 id="record-title">Four roles, research to production</h2>
@@ -139,20 +152,6 @@ export default function Home() {
               ))}
             </ol>
           </div>
-        </div>
-      </section>
-
-      {/* what I take on */}
-      <section className="section section--l" aria-labelledby="take-title">
-        <div className="container">
-          <div className="head">
-            <h2 id="take-title">Work I can take on</h2>
-          </div>
-          <dl className="dl">
-            {competencies.map(([name, text]) => (
-              <div key={name}><dt>{name}</dt><dd>{text}</dd></div>
-            ))}
-          </dl>
         </div>
       </section>
 
