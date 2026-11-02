@@ -9,8 +9,8 @@ const fontHeading = Noto_Serif({ subsets: ['latin'], display: 'swap', variable: 
 const fontBody = Noto_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
 
 export const metadata = {
-  title: 'Kalyan · Software × AI. Researcher. Builder.',
-  description: 'Kalyan — Software Engineer I at Guidewire, Bangalore, building AI agents. Agents, evaluation, MCP, medical and sonar vision research.',
+  title: 'Kalyan, Software × AI. Researcher. Builder.',
+  description: 'Kalyan is a Software Engineer I at Guidewire in Bangalore who builds AI agents, evaluation frameworks and MCP tooling, with research in medical AI and sonar vision.',
 };
 
 export default function Layout({ children }) {

@@ -1,12 +1,12 @@
 import PageHeader from '@/components/PageHeader';
 import { stack } from '@/data/profile';
 
-export const metadata = { title: 'Stack · Kalyan' };
+export const metadata = { title: 'Stack — Kalyan' };
 
 export default function Stack() {
   return (
     <>
-      <PageHeader eyebrow="Tools of the trade" title="Technical stack" native="उपकरण" art="/art/strip-kerala.svg" />
+      <PageHeader title="Technical stack" native="उपकरण" art="/art/strip-kerala.svg" />
       <section className="bg-paper px-4 py-20">
         <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
           {stack.map(([name, items]) => (

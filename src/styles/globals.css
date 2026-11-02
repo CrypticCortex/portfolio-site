@@ -4,6 +4,12 @@
 
 @layer base {
   :root {
+    /* Anant Yatra palette: paper, maroon, temple gold, ink, night sky */
+    --paper: 247 240 224; --paper-2: 239 228 203;
+    --maroon: 122 26 42; --maroon-light: 147 34 51;
+    --gold: 217 168 38; --gold-dark: 128 94 8;
+    --ink: 43 29 22; --mute: 98 81 64;
+    --rule: 226 214 189; --night: 11 16 48; --dusk: 201 165 143;
     --background: 40 55% 92%; --foreground: 15 38% 13%;
     --primary: 351 66% 30%; --primary-foreground: 40 55% 92%;
     --secondary: 40 45% 85%; --secondary-foreground: 15 38% 13%;
@@ -16,18 +22,27 @@
     --radius: 0.9rem;
   }
   html { scroll-behavior: smooth; }
-  body { @apply bg-paper text-ink font-body; }
-  h1, h2, h3, h4 { @apply font-serif; }
-  ::selection { background: #d9a826; color: #2b1d16; }
+  html, body { overflow-x: clip; }
+  body { @apply bg-paper text-ink font-body; font-size: 1rem; -webkit-text-size-adjust: 100%; }
+  h1, h2, h3, h4 { @apply font-serif; text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
+  p, li { text-wrap: pretty; }
+  time, .nums { font-variant-numeric: tabular-nums; }
+  ::selection { background: rgb(var(--gold)); color: rgb(var(--ink)); }
+  :focus-visible { outline: 2px solid rgb(var(--maroon)); outline-offset: 3px; border-radius: 9999px; transition: none; }
+  footer :focus-visible, .on-dark :focus-visible { outline-color: rgb(var(--gold)); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 }
 
 @layer components {
-  .gold-rule { height: 3px; background: linear-gradient(90deg, transparent, #d9a826, transparent); }
-  .paper-card { @apply rounded-2xl bg-card border border-[#e2d6bd] shadow-[0_2px_14px_rgba(122,26,42,.08)]; }
+  .gold-rule { height: 3px; background: linear-gradient(90deg, transparent, rgb(var(--gold)), transparent); }
+  .paper-card { @apply rounded-2xl bg-card border border-rule; box-shadow: 0 0 0 1px rgb(var(--maroon) / .02), 0 2px 14px rgb(var(--maroon) / .08); }
   .chip { @apply inline-block rounded-full bg-paper2 px-3 py-1 text-xs font-semibold text-maroon; }
-  .btn { @apply inline-flex items-center gap-2 rounded-full bg-maroon px-5 py-2.5 text-sm font-semibold text-paper transition hover:bg-maroon-light; box-shadow: inset 0 0 0 2px rgba(217,168,38,.55); }
-  .btn-ghost { @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-maroon transition hover:bg-paper2; box-shadow: inset 0 0 0 2px #7a1a2a; }
-  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.28em] text-gold-dark; }
+  .btn, .btn-ghost { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold; transition: background-color .15s ease, color .15s ease, transform .1s ease; }
+  .btn:active, .btn-ghost:active { transform: scale(.97); }
+  .btn { @apply bg-maroon text-paper hover:bg-maroon-light; box-shadow: inset 0 0 0 2px rgb(var(--gold) / .55); }
+  .btn-ghost { @apply text-maroon hover:bg-paper2; box-shadow: inset 0 0 0 2px rgb(var(--maroon)); }
+  /* small meta line: body face, sentence case, untracked */
+  .meta { @apply text-sm font-semibold text-gold-dark; font-variant-numeric: tabular-nums; }
 }
 
 @keyframes drift { from { transform: translateX(0); } to { transform: translateX(-18%); } }
