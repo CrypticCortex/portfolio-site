@@ -1,10 +1,10 @@
-// Content mirrors https://crypticcortex.vercel.app (checked 2026-10-03).
+// Site content. Every fact here is Kalyan's own; the pages only arrange it.
 export const profile = {
   name: 'Kalyan',
   native: 'कल्याण',
   title: 'Software Engineer I',
   tagline: ['Software × AI.', 'Researcher.', 'Builder.'],
-  bio: 'research papers before graduation, production AI after — I build systems that think, remember, and ship. everything else is configuration.',
+  bio: 'research papers before graduation, production AI after. I build systems that think, remember, and ship. everything else is configuration.',
   location: 'Bangalore, IN',
   email: 'kalyanguru18@gmail.com',
   github: 'https://github.com/CrypticCortex',
@@ -12,19 +12,19 @@ export const profile = {
 };
 
 export const experience = [
-  { role: 'Software Engineer I', org: 'Guidewire', when: 'Feb 2025 – present', points: [
+  { role: 'Software Engineer I', org: 'Guidewire', when: 'Feb 2025 to present', points: [
     'Reduced LLM claim-summarization latency through end-to-end payload optimization.',
     'Developed a multi-judge LLM evaluation framework (5 models, 5 metrics per field, 95% confidence intervals).',
     'Shipped a production claim-summarization agent with data model, persistence and REST API.',
     'Built a production event-scheduling agent (LangGraph workflow with Slack, ServiceNow, room booking).',
     'Delivered a real-time voice claims-intake prototype and a voice MCP capability.',
   ] },
-  { role: 'Research Intern', org: 'IISc Bangalore', when: 'Sep 2024 – Jan 2025', points: [
+  { role: 'Research Intern', org: 'IISc Bangalore', when: 'Sep 2024 to Jan 2025', points: [
     'Built deep learning models for underwater object detection using VLMs on sonar imagery.',
     'Co-authored the TRAM paper on transformer-based Mask R-CNN for sonar data.',
   ] },
-  { role: 'AI/ML Intern', org: 'Hexon Global', when: 'May 2024 – Aug 2024', points: ['Reduced LLM API costs by about 20% through model-call optimization.'] },
-  { role: 'Student Researcher', org: 'Amrita University', when: 'Jul 2023 – Jul 2024', points: [
+  { role: 'AI/ML Intern', org: 'Hexon Global', when: 'May 2024 to Aug 2024', points: ['Reduced LLM API costs by about 20% through model-call optimization.'] },
+  { role: 'Student Researcher', org: 'Amrita University', when: 'Jul 2023 to Jul 2024', points: [
     'Developed MedGPT diagnostic AI (accuracy improved from 30% to 80%).',
     'Co-authored 4 research papers across medical AI, computer vision and NLP.',
   ] },
@@ -40,14 +40,14 @@ export const competencies = [
 ];
 
 export const projects = [
-  { name: 'agam', featured: true, url: 'https://github.com/CrypticCortex/agam', blurb: 'Open-source memory system for AI coding agents — proactively injects relevant context instead of retrieving it on demand. 300+ tests, sole author and maintainer.', stack: ['Python', 'MCP', 'SQLite FTS5'] },
+  { name: 'agam', featured: true, url: 'https://github.com/CrypticCortex/agam', blurb: 'Open-source memory system for AI coding agents. It injects relevant context proactively instead of retrieving it on demand. 300+ tests, sole author and maintainer.', stack: ['Python', 'MCP', 'SQLite FTS5'] },
   { name: 'Voice FNOL', featured: true, blurb: 'Voice-based insurance claim intake: a parallel LLM pipeline (conversation + extraction), local STT, on-device TTS and a 3D audio-reactive visualizer.', stack: ['TypeScript', 'Fastify', 'Claude API', 'Three.js'] },
   { name: 'Cognitive OS', blurb: 'Multi-agent Claude Code setup with 30+ custom skills and 14 specialized agents, a SQLite knowledge graph of 400+ entities, session hooks and persistent memory.', stack: ['Claude Code', 'Python', 'SQLite FTS5', 'MCP'] },
   { name: 'MedGPT', blurb: 'Diagnostic AI deployed at AIMS Kochi Hospital; accuracy improved from 30% to 80%.', stack: ['Flutter', 'OpenAI', 'AWS', 'Redis'] },
-  { name: 'Kanaku', url: 'https://github.com/CrypticCortex/VyaparSahayak', blurb: 'AI-powered dead-stock management for FMCG distributors — 221 real products, 74 stores, statistical ML scoring and WhatsApp integration.', stack: ['Next.js', 'Prisma', 'Gemini', 'pgvector'] },
+  { name: 'Kanaku', url: 'https://github.com/CrypticCortex/VyaparSahayak', blurb: 'AI-powered dead-stock management for FMCG distributors: 221 real products, 74 stores, statistical ML scoring and WhatsApp integration.', stack: ['Next.js', 'Prisma', 'Gemini', 'pgvector'] },
   { name: 'SheLaw', url: 'https://github.com/CrypticCortex/shelawbackend', blurb: 'Legal assistance platform for women using RAG with multi-query retrieval.', stack: ['Flutter', 'LangChain', 'LangGraph'] },
   { name: 'JobScrapper', blurb: 'AI job matching with two-layer scoring (heuristic + semantic), automated scraping and email alerts.', stack: ['Python', 'Next.js', 'OpenAI', 'Neon Postgres'] },
-  { name: 'VoiceAI', blurb: 'Automated customer interactions — product explanations and event registration — integrated with Indian IVR systems.', stack: ['Python', 'TTS', 'WebSockets'] },
+  { name: 'VoiceAI', blurb: 'Automated customer interactions (product explanations and event registration) integrated with Indian IVR systems.', stack: ['Python', 'TTS', 'WebSockets'] },
 ];
 
 export const publications = [
@@ -79,5 +79,5 @@ export const achievements = [
 ];
 
 export const education = [
-  { degree: 'B.Tech Computer Science & Engineering (AI)', institution: 'Amrita Vishwa Vidyapeetham', duration: '2021 – 2025' },
+  { degree: 'B.Tech Computer Science & Engineering (AI)', institution: 'Amrita Vishwa Vidyapeetham', duration: '2021 to 2025' },
 ];

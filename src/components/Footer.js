@@ -1,17 +1,36 @@
+import Link from 'next/link';
+import { profile } from '@/data/profile';
+
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-night text-paper">
-      <img src="/art/strip-night.svg" alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-80" />
-      <div className="absolute inset-0 bg-gradient-to-b from-night via-night/40 to-night/80" />
-      <div className="relative mx-auto max-w-5xl px-6 pb-12 pt-28 text-center">
-        <p className="font-serif text-3xl font-bold sm:text-4xl">Let&apos;s build something that thinks, remembers and ships.</p>
-        <a href="mailto:kalyanguru18@gmail.com" className="btn mt-6">kalyanguru18@gmail.com</a>
-        <div className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-base text-paper/85">
-          <a className="hover:text-gold" href="https://github.com/CrypticCortex" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a className="hover:text-gold" href="https://linkedin.com/in/crypticcortex" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <>
+      <section className="band band--pink grained close" aria-labelledby="close-title">
+        <div className="container close__grid">
+          <div>
+            <h2 id="close-title">Building agents? Write to me.</h2>
+            <a className="close__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
+          </div>
+          <div className="close__links">
+            <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
         </div>
-        <p className="mt-8 text-sm text-paper/70">Kalyan, Bangalore, 2026. The landscapes are painted by <i>Anant Yatra</i> (<span lang="hi">अनन्त यात्रा</span>), my procedural painting engine.</p>
-      </div>
-    </footer>
+      </section>
+      <footer className="footer">
+        <div className="container">
+          <div className="footer__row small">
+            <p>Kalyan (<span lang="hi">कल्याण</span>), Bangalore, 2026.</p>
+            <nav aria-label="Footer">
+              <Link href="/research">Research</Link>
+              <Link href="/stack">Stack</Link>
+              <Link href="/education">Education</Link>
+            </nav>
+          </div>
+          <p className="small" data-credits>
+            Photographs, reprinted in two inks: microphone by Will Fisher (CC BY-SA 2.0), George Peabody Library by Matthew Petroff (CC BY-SA 3.0), Nachet microscope by Didier Descouens (CC BY-SA 4.0), all via Wikimedia Commons.
+          </p>
+        </div>
+      </footer>
+    </>
   );
 }

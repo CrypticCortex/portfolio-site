@@ -1,23 +1,21 @@
-import PageHeader from '@/components/PageHeader';
 import { stack } from '@/data/profile';
 
-export const metadata = { title: 'Stack — Kalyan' };
+export const metadata = { title: 'Technical stack, Kalyan' };
 
 export default function Stack() {
   return (
-    <>
-      <PageHeader title="Technical stack" native="उपकरण" art="/art/strip-kerala.svg" />
-      <section className="bg-paper px-4 py-20">
-        <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+    <div className="container page-body">
+      <header className="page-head">
+        <h1>Technical stack</h1>
+        <p className="lead">What I reach for, from the model to the machine it runs on.</p>
+      </header>
+      <table className="stack-table">
+        <tbody>
           {stack.map(([name, items]) => (
-            <div key={name} className="paper-card p-6">
-              <h3 className="text-xl font-bold text-maroon">{name}</h3>
-              <div className="gold-rule my-3" />
-              <div className="flex flex-wrap gap-2">{items.map((t) => <span key={t} className="chip">{t}</span>)}</div>
-            </div>
+            <tr key={name}><th scope="row">{name}</th><td>{items.join(', ')}</td></tr>
           ))}
-        </div>
-      </section>
-    </>
+        </tbody>
+      </table>
+    </div>
   );
 }
