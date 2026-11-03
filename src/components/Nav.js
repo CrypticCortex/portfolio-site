@@ -3,7 +3,7 @@ import { profile } from '@/data/profile';
 
 const links = [
   ['/#work', 'Work'],
-  ['/#record', 'Record'],
+  ['/#experience', 'Experience'],
   ['/research', 'Research'],
   ['/stack', 'Stack'],
   ['/education', 'Education'],

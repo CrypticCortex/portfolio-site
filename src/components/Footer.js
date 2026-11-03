@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="close__scrim" aria-hidden="true" />
         <div className="container close__grid">
           <div>
-            <h2 id="close-title">Building agents? Write to me.</h2>
+            <h2 id="close-title">Say hello.</h2>
             <a className="close__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
           </div>
           <div className="close__links">
@@ -32,7 +32,7 @@ export default function Footer() {
             </nav>
           </div>
           <p className="small" data-credits>
-            Photographs, reprinted in two inks: Vidhana Soudha by DeepanjanGhosh (CC BY-SA 4.0), microphone by Will Fisher (CC BY-SA 2.0), George Peabody Library by Matthew Petroff (CC BY-SA 3.0), Nachet microscope by Didier Descouens (CC BY-SA 4.0), all via Wikimedia Commons.
+            Photographs, reprinted in two inks: Vidhana Soudha by DeepanjanGhosh (CC BY-SA 4.0), microphone by Will Fisher (CC BY-SA 2.0), George Peabody Library by Matthew Petroff (CC BY-SA 3.0), Nachet microscope by Didier Descouens (CC BY-SA 4.0), server racks by NOIRLab/NSF/AURA/T. Slovinský (CC BY 4.0), all via Wikimedia Commons.
           </p>
         </div>
       </footer>
