@@ -13,16 +13,16 @@ export default function Nav() {
   return (
     <header className="nav">
       <div className="container nav__bar">
-        <Link href="/" className="wordmark" aria-label="Kalyan, home">Kalyan</Link>
+        <Link href="/" className="wordmark" aria-label="Kalyan, home">KALYAN<span>/spec</span></Link>
         <nav className="nav__links" aria-label="Main">
           {links.map(([href, label]) => <Link key={label} href={href}>{label}</Link>)}
-          <a className="btn btn--secondary" href={`mailto:${profile.email}`}>Email me</a>
+          <a className="nav__mail" href={`mailto:${profile.email}`}>Email</a>
         </nav>
         <details className="nav__menu">
-          <summary className="btn btn--secondary">Menu</summary>
+          <summary>Menu</summary>
           <nav className="nav__panel" aria-label="Main, small screens">
             {links.map(([href, label]) => <Link key={label} href={href}>{label}</Link>)}
-            <a href={`mailto:${profile.email}`}>Email me</a>
+            <a href={`mailto:${profile.email}`}>Email</a>
           </nav>
         </details>
       </div>
