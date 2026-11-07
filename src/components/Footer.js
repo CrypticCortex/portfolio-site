@@ -12,7 +12,7 @@ export default function Footer() {
           <Image src={bangalore} alt="" sizes="100vw" />
         </div>
         <div className="container close__grid">
-          <Plate n="07" technique="Night vision, dithered" note="Vidhana Soudha, 12.979°N 77.591°E" />
+          <Plate n="11" technique="Night vision, dithered" note="Vidhana Soudha, 12.979°N 77.591°E" />
           <h2 id="close-title">Say hello.</h2>
           <a className="close__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
           <div className="close__links">
