@@ -1,18 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import bangalore from '../../public/spec/bangalore-dither.png';
-import Plate from './Plate';
+import Kicker from './Kicker';
 import { profile } from '@/data/profile';
 
 export default function Footer() {
   return (
     <>
       <section className="close" aria-labelledby="close-title">
-        <div className="close__art">
-          <Image src={bangalore} alt="" sizes="100vw" />
-        </div>
+        <div className="close__art"><Image src={bangalore} alt="" sizes="100vw" /></div>
         <div className="container close__grid">
-          <Plate n="11" technique="Night vision, dithered" note="Vidhana Soudha, 12.979°N 77.591°E" />
+          <Kicker n="07">Night vision · Vidhana Soudha, Bangalore</Kicker>
           <h2 id="close-title">Say hello.</h2>
           <a className="close__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
           <div className="close__links">
@@ -23,7 +21,7 @@ export default function Footer() {
       </section>
       <footer className="footer">
         <div className="container footer__row">
-          <p>Kalyan (<span lang="hi">कल्याण</span>), Bangalore, 2026.</p>
+          <p>Kalyan (<span lang="hi">कल्याण</span>), Bangalore, 2026. End of transmission.</p>
           <nav aria-label="Footer">
             <Link href="/research">Research</Link>
             <Link href="/stack">Stack</Link>

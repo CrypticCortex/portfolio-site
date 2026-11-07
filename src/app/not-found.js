@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import Plate from '@/components/Plate';
 
 export default function NotFound() {
   return (
-    <div className="container page-body anaglyph">
-      <Plate n="404" technique="Anaglyph 3D" note="red/cyan glasses recommended" />
-      <h1 className="anaglyph__big" data-text="404">404</h1>
-      <p className="lead">This page is not here. <Link href="/">Back to the home page</Link>.</p>
+    <div className="nosignal">
+      <div className="bars" aria-hidden="true">{['#c0c0c0', '#c0c000', '#00c0c0', '#00c000', '#c000c0', '#c00000', '#0000c0'].map((c) => <span key={c} style={{ background: c }} />)}</div>
+      <div className="container nosignal__text">
+        <h1>No signal</h1>
+        <p className="lead">Channel 404 is off the air. <Link href="/">Back to channel 01</Link>.</p>
+      </div>
     </div>
   );
 }

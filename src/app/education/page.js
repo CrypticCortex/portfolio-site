@@ -1,34 +1,28 @@
 import Image from 'next/image';
-import Plate from '@/components/Plate';
+import Kicker from '@/components/Kicker';
+import Feed from '@/components/Feed';
 import { education } from '@/data/profile';
-import cyan from '../../../public/spec/cyanotype.webp';
+import portrait from '../../../public/spec/portrait-dither.png';
 
 export const metadata = { title: 'Education, Kalyan' };
 
-// Cyanotype: a sun print, the portrait laid on the paper as a photogram.
 export default function Education() {
   return (
-    <div className="cyanotype">
-      <div className="container page-body cyanotype__grid">
-        <div>
-          <header className="page-head">
-            <Plate n="E" technique="Cyanotype" note="sun print, Prussian blue" />
-            <h1>Education</h1>
-          </header>
-          <ol className="trail">
-            {education.map((e) => (
-              <li key={e.degree}>
-                <div>
-                  <time>{e.duration}</time>
-                  <h3>{e.degree}</h3>
-                  <p className="lead">{e.institution}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-        <Image className="cyanotype__print" src={cyan} alt="Kalyan's portrait as a cyanotype photogram" sizes="(max-width: 60rem) 80vw, 36vw" />
+    <div className="container page-body edu">
+      <div>
+        <header className="page-head">
+          <Kicker n="05">Archive · 2021 to 2025</Kicker>
+          <h1>Education</h1>
+        </header>
+        <ol className="rows rows--wide">
+          {education.map((e) => (
+            <li key={e.degree}><h3>{e.degree}</h3><span>{e.institution}</span><time>{e.duration}</time></li>
+          ))}
+        </ol>
       </div>
+      <Feed label="ARCHIVE · 2021" right="▶ PLAY" className="edu__feed">
+        <Image className="edu__img" src={portrait} alt="" sizes="(max-width: 60rem) 80vw, 30vw" />
+      </Feed>
     </div>
   );
 }

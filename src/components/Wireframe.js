@@ -31,7 +31,7 @@ export default function Wireframe() {
       for (let i = 0; i < U; i++) for (let j = 0; j < V; j++) {
         const a = P[i * V + j], b = P[((i + 1) % U) * V + j], d = P[i * V + ((j + 1) % V)];
         const depth = (a[2] + 1.5) / 3;
-        ctx.strokeStyle = `rgba(214,255,90,${0.9 - depth * 0.7})`;
+        ctx.strokeStyle = `rgba(182,255,59,${0.9 - depth * 0.7})`;
         ctx.beginPath(); ctx.moveTo(b[0], b[1]); ctx.lineTo(a[0], a[1]); ctx.lineTo(d[0], d[1]); ctx.stroke();
       }
       if (!reduce && visible) { t += 0.006; raf = requestAnimationFrame(draw); }
