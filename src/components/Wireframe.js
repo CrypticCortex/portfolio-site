@@ -19,11 +19,12 @@ export default function Wireframe() {
       if (c.width !== w * dpr) { c.width = w * dpr; c.height = h * dpr; }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
       const ca = Math.cos(t), sa = Math.sin(t), cb = Math.cos(t * 0.6 + 0.8), sb = Math.sin(t * 0.6 + 0.8);
-      const s = Math.min(w, h) * 0.34;
+      // fit the nearest (largest) projected point inside the canvas with a margin
+      const D = 6, kMax = D / (D - (R + r)), s = (Math.min(w, h) / 2) * 0.88 / ((R + r) * kMax);
       const P = pts.map(([x, y, z]) => {
         let X = x * ca - z * sa, Z = x * sa + z * ca;
         let Y = y * cb - Z * sb; Z = y * sb + Z * cb;
-        const k = 3 / (3 + Z);
+        const k = D / (D + Z);
         return [w / 2 + X * s * k, h / 2 + Y * s * k, Z];
       });
       ctx.lineWidth = 1;
