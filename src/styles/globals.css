@@ -41,7 +41,7 @@
 }
 .day, .night { position: relative; isolation: isolate; background: var(--bg); color: var(--fg); }
 /* riso grain over the paper, scanlines over the glass */
-.day::after { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; background: var(--grain) 0 0 / 200px 200px; opacity: 0.55; mix-blend-mode: multiply; }
+.day::after { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; background: var(--grain) 0 0 / 200px 200px; opacity: 0.3; mix-blend-mode: multiply; }
 .night::after { content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none;
   background: repeating-linear-gradient(to bottom, transparent 0 2px, rgb(0 0 0 / 0.22) 2px 3px); }
 
