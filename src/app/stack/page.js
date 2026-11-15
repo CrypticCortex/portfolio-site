@@ -7,7 +7,7 @@ export const metadata = { title: 'Technical stack, Kalyan' };
 
 export default function Stack() {
   return (
-    <div className="container page-body">
+    <div className="night page" data-phase="night"><div className="container page-body">
       <header className="page-head">
         <Kicker n="04">ASCII render · after donut.c</Kicker>
         <h1>Technical stack</h1>
@@ -17,6 +17,6 @@ export default function Stack() {
       <dl className="stack stack--page">
         {stack.map(([name, items]) => <div key={name}><dt>{name}</dt><dd>{items.join(', ')}</dd></div>)}
       </dl>
-    </div>
+    </div></div>
   );
 }

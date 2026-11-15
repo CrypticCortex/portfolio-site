@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-// The monitor's HUD: which channel you are on, a running timecode, and the channel switcher.
+// The bar that rides the whole journey: which channel you are on, the time of day the page has reached,
+// and Bangalore's clock. It prints in ink over the day sections and glows like a monitor over the night ones.
 export const channels = [
   ['/', '01', 'Home'],
   ['/#work', '02', 'Work'],
@@ -12,12 +13,37 @@ export const channels = [
   ['/education', '05', 'Education'],
 ];
 
-const pad = (n) => String(n).padStart(2, '0');
+const glyph = { dawn: '◒', noon: '☀', dusk: '◓', night: '☾' };
+const istClock = () => new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' }).format(new Date());
 
 export default function Hud() {
   const path = usePathname();
-  const [t, setT] = useState(0);
-  useEffect(() => { const s = Date.now(); const id = setInterval(() => setT(Math.floor((Date.now() - s) / 1000)), 1000); return () => clearInterval(id); }, []);
+  const [phase, setPhase] = useState('night');
+  const [clock, setClock] = useState('');
+
+  useEffect(() => {
+    setClock(istClock());
+    const id = setInterval(() => setClock(istClock()), 30000);
+    return () => clearInterval(id);
+  }, []);
+
+  // whichever section sits under the bar decides the time of day
+  useEffect(() => {
+    const sections = [...document.querySelectorAll('[data-phase]')];
+    const apply = (p) => {
+      setPhase(p);
+      document.documentElement.dataset.scheme = p === 'dawn' || p === 'noon' ? 'day' : 'night';
+    };
+    if (!sections.length) { apply('night'); return; }
+    const io = new IntersectionObserver((entries) => {
+      const hit = entries.filter((e) => e.isIntersecting).pop();
+      if (hit) apply(hit.target.dataset.phase);
+    }, { rootMargin: '-56px 0px -92% 0px' });
+    sections.forEach((s) => io.observe(s));
+    apply(sections[0].dataset.phase);
+    return () => io.disconnect();
+  }, [path]);
+
   const current = channels.find(([href]) => href === path) || ['', '--', 'No signal'];
   return (
     <header className="hud">
@@ -30,7 +56,9 @@ export default function Hud() {
             <Link key={n} href={href} aria-current={href === path ? 'page' : undefined}><span>{n}</span>{label}</Link>
           ))}
         </nav>
-        <p className="hud__time" aria-hidden="true">12.97N 77.59E <span>T+{pad(Math.floor(t / 3600))}:{pad(Math.floor(t / 60) % 60)}:{pad(t % 60)}</span></p>
+        <p className="hud__time" aria-hidden="true">
+          <span className="hud__phase">{glyph[phase]} {phase}</span> BLR {clock} IST
+        </p>
         <details className="hud__menu">
           <summary>CH ▾</summary>
           <nav aria-label="Channels, small screens">

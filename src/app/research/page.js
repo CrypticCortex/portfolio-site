@@ -5,7 +5,7 @@ export const metadata = { title: 'Research by Kalyan' };
 
 export default function Research() {
   return (
-    <div className="container page-body">
+    <div className="night page" data-phase="night"><div className="container page-body">
       <header className="page-head">
         <Kicker n="03">ls -l ~/papers</Kicker>
         <h1>Research</h1>
@@ -16,6 +16,6 @@ export default function Research() {
           <li key={title}><h3>{title}</h3><span>{String(i + 1).padStart(2, '0')} · {org}</span><time>{when}</time></li>
         ))}
       </ol>
-    </div>
+    </div></div>
   );
 }

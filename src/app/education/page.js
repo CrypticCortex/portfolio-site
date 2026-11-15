@@ -8,7 +8,7 @@ export const metadata = { title: 'Education, Kalyan' };
 
 export default function Education() {
   return (
-    <div className="container page-body edu">
+    <div className="night page" data-phase="night"><div className="container page-body edu">
       <div>
         <header className="page-head">
           <Kicker n="05">Archive · 2021 to 2025</Kicker>
@@ -23,6 +23,6 @@ export default function Education() {
       <Feed label="ARCHIVE · 2021" right="▶ PLAY" className="edu__feed">
         <Image className="edu__img" src={portrait} alt="" sizes="(max-width: 60rem) 80vw, 30vw" />
       </Feed>
-    </div>
+    </div></div>
   );
 }
