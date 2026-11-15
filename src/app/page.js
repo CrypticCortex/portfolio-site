@@ -1,180 +1,207 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import Feed from '@/components/Feed';
-import Kicker from '@/components/Kicker';
-import SplitFlap from '@/components/SplitFlap';
-import ThermalScreen from '@/components/ThermalScreen';
-import Typer from '@/components/Typer';
-import Wireframe from '@/components/Wireframe';
-import { profile, experience, projects, publications, achievements, stack } from '@/data/profile';
+import Zine from '@/components/Zine';
+import { profile, experience, projects, publications, achievements, stack, competencies, education } from '@/data/profile';
 import plateMaroon from '../../public/yatra/portrait-maroon.webp';
 import plateGold from '../../public/yatra/portrait-gold.webp';
-import portraitIr from '../../public/spec/portrait-ir.webp';
 import dawn from '../../public/yatra/hero-riso.webp';
-import dusk from '../../public/yatra/strip-kerala-riso.webp';
-import nightfall from '../../public/yatra/night-strip.webp';
+import backwaters from '../../public/yatra/strip-kerala-riso.webp';
+import bangalore from '../../public/yatra/bangalore-riso.webp';
 import memory from '../../public/yatra/memory-riso.webp';
 import voice from '../../public/yatra/voice-riso.webp';
 import servers from '../../public/yatra/servers-riso.webp';
 import microscope from '../../public/yatra/research-riso.webp';
-import memoryIr from '../../public/spec/memory-ir.webp';
-import voiceIr from '../../public/spec/voice-ir.webp';
-import serversIr from '../../public/spec/servers-ir.webp';
-import microscopeIr from '../../public/spec/research-ir.webp';
 
-// One day in Bangalore, top to bottom: printed in two inks at dawn and noon, sunset over the backwaters,
-// then the night shift on monitors. Each section's data-phase tells the HUD what time it is.
-const covers = {
-  agam: [memory, memoryIr, '38.4'],
-  'Voice FNOL': [voice, voiceIr, '41.2'],
-  'Cognitive OS': [servers, serversIr, '44.9'],
-  MedGPT: [microscope, microscopeIr, '36.6'],
-};
-const featured = ['agam', 'Voice FNOL', 'Cognitive OS', 'MedGPT'];
+// Kalyan, Issue 01: a 16-page riso zine (cover, 14 numbered pages, back cover) printed in maroon and marigold.
+// Page numbers here are the #pN anchors and the folios; keep the contents list in step with the order below.
 const byName = (n) => projects.find((p) => p.name === n);
-const orgs = { Guidewire: 'Guidewire', 'IISc Bangalore': 'IISc', 'Hexon Global': 'Hexon', 'Amrita University': 'Amrita' };
+const lead = ['agam', 'Voice FNOL', 'Cognitive OS', 'MedGPT'];
+const covers = { agam: memory, 'Voice FNOL': voice, 'Cognitive OS': servers, MedGPT: microscope };
+const [current, ...before] = experience;
+
+const contents = [
+  [2, 'Hello'],
+  [3, 'What I do'],
+  [4, 'agam'],
+  [5, 'Voice FNOL'],
+  [6, 'Cognitive OS'],
+  [7, 'MedGPT'],
+  [8, 'Also on file'],
+  [9, 'Guidewire, now'],
+  [10, 'Before that'],
+  [11, 'Research'],
+  [12, 'Recognition, education'],
+  [13, 'Stack'],
+  [14, 'Principles'],
+];
+
+function Page({ n, label, className = '', children }) {
+  return (
+    <article className={`page ${className}`} aria-label={label}>
+      {children}
+      {n > 0 && <footer className="folio"><span>Kalyan · Issue 01</span><span>{String(n).padStart(2, '0')}</span></footer>}
+    </article>
+  );
+}
+
+function Riso({ src, alt = '', className = '', priority }) {
+  return <div className={`riso ${className}`}><Image src={src} alt={alt} sizes="(min-width: 60rem) 40vw, 90vw" priority={priority} /></div>;
+}
+
+function ProjectPage({ n, name, flip }) {
+  const p = byName(name);
+  return (
+    <Page n={n} label={p.name} className={`project ${flip ? 'project--flip' : ''}`}>
+      <Riso src={covers[name]} className="project__art" />
+      <div className="project__text">
+        <p className="kicker">Plate {String(n - 3).padStart(2, '0')} · Selected work</p>
+        <h2 className="misreg" data-text={p.name}>{p.name}</h2>
+        <p className="project__blurb">{p.blurb}</p>
+        <p className="tags">{p.stack.join(' · ')}</p>
+        {p.url && <a href={p.url} target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a>}
+      </div>
+    </Page>
+  );
+}
 
 export default function Home() {
-  const more = projects.filter((p) => !featured.includes(p.name));
+  const more = projects.filter((p) => !lead.includes(p.name));
   return (
-    <>
-      {/* dawn: the person, printed */}
-      <section className="day hero" data-phase="dawn" aria-labelledby="hero-name">
-        <div className="container hero__grid">
-          <div className="hero__text">
-            <Kicker n="01">Dawn · Bangalore, 12.97° N</Kicker>
-            <h1 id="hero-name" className="name">
-              <span className="misreg" data-text="Kalyan">Kalyan</span>
-              <span className="native" lang="hi">{profile.native}</span>
-            </h1>
-            <p className="lead">{profile.tagline.join(' ')} I build agents, the evals that judge them, and the memory they run on.</p>
-            <p className="hero__facts">{profile.title} at Guidewire, where AI meets software. Before that, research at IISc Bangalore and Amrita University.</p>
-            <p className="hero__links">
-              <a href="#work">Selected work ↓</a>
-              <Link href="/research">Research</Link>
-              <a href={`mailto:${profile.email}`}>Say hello</a>
-            </p>
-          </div>
-          <ThermalScreen maroon={plateMaroon} gold={plateGold} ir={portraitIr} />
+    <Zine pdf="/kalyan-zine.pdf">
+      {/* front cover */}
+      <Page n={0} label="Cover" className="cover">
+        <p className="cover__issue"><span>Issue 01</span><span>Bangalore · 2026</span><span>₹0</span></p>
+        <h1 className="cover__name"><span className="misreg" data-text="Kalyan">Kalyan</span></h1>
+        <p className="cover__native" lang="hi">{profile.native}</p>
+        <div className="cover__plate" role="img" aria-label="Portrait of Kalyan">
+          <Image className="plate plate--gold" src={plateGold} alt="" priority sizes="(min-width: 60rem) 30vw, 70vw" />
+          <Image className="plate plate--maroon" src={plateMaroon} alt="" priority sizes="(min-width: 60rem) 30vw, 70vw" />
         </div>
-        <div className="band band--dawn" aria-hidden="true">
-          <Image src={dawn} alt="" sizes="200vw" priority />
-        </div>
-      </section>
+        <p className="cover__line">{profile.tagline.join(' ')}</p>
+        <p className="sticker" aria-hidden="true">turn<br />the<br />page →</p>
+      </Page>
 
-      {/* noon: the work, as prints that turn to infrared under the cursor */}
-      <section className="day section" id="work" data-phase="noon" aria-labelledby="work-title">
-        <div className="container">
-          <Kicker n="02">Noon · four plates, two inks, one infrared camera</Kicker>
-          <h2 id="work-title">Selected work</h2>
-          <ol className="gallery">
-            {featured.map(byName).map((p, i) => {
-              const [print, ir, temp] = covers[p.name];
-              return (
-                <li key={p.name} className="work" tabIndex={-1}>
-                  <Feed label={`Plate 0${i + 2}`} right={`IR ${temp}°C`} className="work__feed">
-                    <div className="work__cover">
-                      <Image className="work__print" src={print} alt="" sizes="(max-width: 60rem) 100vw, 50vw" />
-                      <Image className="work__ir" src={ir} alt="" sizes="(max-width: 60rem) 100vw, 50vw" />
-                    </div>
-                    <span className="crosshair" aria-hidden="true" />
-                  </Feed>
-                  <div className="work__text">
-                    <h3>{p.name}</h3>
-                    <p>{p.blurb}</p>
-                    <p className="tags">{p.stack.join(' · ')}</p>
-                    {p.url && <a href={p.url} target="_blank" rel="noopener noreferrer">Open source ↗</a>}
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-
-          <h3 className="sub-title">Also on file</h3>
-          <ul className="index">
-            {more.map((p) => (
-              <li key={p.name}>
-                <h4><SplitFlap text={p.name} /></h4>
-                <p>{p.blurb}</p>
-                <div className="meta">
-                  <span className="tags">{p.stack.join(' · ')}</span>
-                  {p.url && <a href={p.url} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
-                </div>
-              </li>
-            ))}
-          </ul>
+      {/* inside front cover: contents + colophon */}
+      <Page n={1} label="Contents" className="contents">
+        <h2>In this issue</h2>
+        <ol className="toc">
+          {contents.map(([n, title]) => (
+            <li key={n}><a href={`#p${n}`}><span>{title}</span><span className="toc__dots" aria-hidden="true" /><span>{String(n).padStart(2, '0')}</span></a></li>
+          ))}
+        </ol>
+        <div className="colophon">
+          <p>Printed in two inks, maroon and marigold, on cream stock. Landscapes from the Anant Yatra generator, re-inked.</p>
+          <p>Use ← → or swipe to turn pages.</p>
         </div>
-      </section>
+      </Page>
 
-      {/* dusk: the backwaters go down, the terminal comes up */}
-      <section className="dusk" data-phase="dusk" aria-label="In my words">
-        <div className="band band--dusk" aria-hidden="true"><Image src={dusk} alt="" sizes="200vw" /></div>
-        <div className="container dusk__text">
-          <p className="prompt">kalyan@bangalore:~$ cat principles.txt</p>
-          <Typer text="I build systems that think, remember and ship. Everything else is configuration." />
-        </div>
-        <div className="band band--night" aria-hidden="true"><Image src={nightfall} alt="" sizes="100vw" /></div>
-      </section>
+      <Page n={2} label="Hello" className="hello">
+        <p className="kicker">Hello · வணக்கம் · नमस्ते</p>
+        <h2>I&rsquo;m Kalyan.</h2>
+        <p className="hello__lead">{profile.title} at Guidewire in Bangalore, working where AI meets software. I build agents, the evals that judge them, and the memory they run on.</p>
+        <p>{profile.bio.charAt(0).toUpperCase() + profile.bio.slice(1)}</p>
+        <p className="hello__before">Before Guidewire: research at IISc Bangalore and Amrita University, and five published papers.</p>
+        <Riso src={dawn} className="hello__band" />
+      </Page>
 
-      {/* night: experience as a departures board */}
-      <section className="night section" id="experience" data-phase="night" aria-labelledby="exp-title">
-        <div className="container">
-          <Kicker n="03">Night · departures, 2023 to now</Kicker>
-          <h2 id="exp-title">Experience</h2>
-          <div className="board" role="list">
-            <div className="board__head" aria-hidden="true"><span>When</span><span>Station</span><span>Role</span><span>Status</span></div>
-            {experience.map((e, i) => (
-              <article key={e.org} className="board__row" role="listitem">
-                <time>{e.when}</time>
-                <p className="board__org"><SplitFlap text={orgs[e.org] || e.org} /></p>
-                <h3>{e.role} <span className="sr">at {e.org}</span></h3>
-                <p className={`status ${i === 0 ? 'status--on' : ''}`}>{i === 0 ? 'On air' : 'Logged'}</p>
-                <ul className="board__notes">{e.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Page n={3} label="What I do" className="doing">
+        <h2>What I do</h2>
+        <dl className="doing__list">
+          {competencies.map(([what, how], i) => (
+            <div key={what}><dt><span>{String(i + 1).padStart(2, '0')}</span>{what}</dt><dd>{how}</dd></div>
+          ))}
+        </dl>
+      </Page>
 
-      {/* stack beside a wireframe */}
-      <section className="night section section--panel" data-phase="night" aria-labelledby="stack-title">
-        <div className="container wire__grid">
-          <div>
-            <Kicker n="04">Render · torus, 648 vertices</Kicker>
-            <h2 id="stack-title">Stack</h2>
-            <dl className="stack">
-              {stack.map(([group, items]) => (
-                <div key={group}><dt>{group}</dt><dd>{items.join(', ')}</dd></div>
-              ))}
-            </dl>
-          </div>
-          <Feed label="Render" right="60 FPS" className="wire__feed"><Wireframe /></Feed>
-        </div>
-      </section>
+      <ProjectPage n={4} name="agam" />
+      <ProjectPage n={5} name="Voice FNOL" flip />
+      <ProjectPage n={6} name="Cognitive OS" />
+      <ProjectPage n={7} name="MedGPT" flip />
 
-      {/* research and recognition as terminal output */}
-      <section className="night section" data-phase="night" aria-label="Research and recognition">
-        <div className="container columns">
-          <div>
-            <Kicker n="05">ls ~/papers</Kicker>
-            <h2>Research</h2>
-            <ol className="rows">
-              {publications.map(([title, org, when]) => (
-                <li key={title}><h3>{title}</h3><span>{org}</span><time>{when}</time></li>
-              ))}
-            </ol>
-          </div>
-          <div>
-            <Kicker n="06">ls ~/recognition</Kicker>
-            <h2>Recognition</h2>
-            <ul className="rows">
-              {achievements.map(([what, where, when]) => (
-                <li key={what + where}><h3>{what}</h3><span>{where}</span><time>{when}</time></li>
-              ))}
-            </ul>
-          </div>
+      <Page n={8} label="Also on file" className="more">
+        <h2>Also on file</h2>
+        <ul className="more__list">
+          {more.map((p) => (
+            <li key={p.name}>
+              <h3>{p.name}</h3>
+              <p>{p.blurb}</p>
+              <p className="tags">{p.stack.join(' · ')}{p.url && <> · <a href={p.url} target="_blank" rel="noopener noreferrer">GitHub ↗</a></>}</p>
+            </li>
+          ))}
+        </ul>
+      </Page>
+
+      <Page n={9} label="Experience: Guidewire" className="job">
+        <p className="kicker">{current.when}</p>
+        <h2 className="misreg" data-text={current.org}>{current.org}</h2>
+        <p className="job__role">{current.role}</p>
+        <ul className="job__points">{current.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+        <p className="stamp" aria-hidden="true">Now</p>
+      </Page>
+
+      <Page n={10} label="Experience: before Guidewire" className="before">
+        <h2>Before that</h2>
+        <ol className="before__list">
+          {before.map((e) => (
+            <li key={e.org}>
+              <p className="kicker">{e.when}</p>
+              <h3>{e.org}</h3>
+              <p className="before__role">{e.role}</p>
+              <ul>{e.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+            </li>
+          ))}
+        </ol>
+      </Page>
+
+      <Page n={11} label="Research" className="papers">
+        <h2>Research</h2>
+        <ol className="papers__list">
+          {publications.map(([title, org, when], i) => (
+            <li key={title}><span className="papers__n">{String(i + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{org} · {when}</p></li>
+          ))}
+        </ol>
+      </Page>
+
+      <Page n={12} label="Recognition and education" className="prizes">
+        <h2>Recognition</h2>
+        <ul className="prizes__list">
+          {achievements.map(([what, where, when]) => (
+            <li key={what + where}><strong>{what}</strong><span>{where}</span><time>{when}</time></li>
+          ))}
+        </ul>
+        <h2 className="prizes__edu">Education</h2>
+        {education.map((e) => (
+          <p key={e.degree} className="edu"><strong>{e.degree}</strong><span>{e.institution} · {e.duration}</span></p>
+        ))}
+      </Page>
+
+      <Page n={13} label="Stack" className="stack">
+        <h2>Stack</h2>
+        <dl className="stack__list">
+          {stack.map(([group, items]) => <div key={group}><dt>{group}</dt><dd>{items.join(', ')}</dd></div>)}
+        </dl>
+      </Page>
+
+      <Page n={14} label="Principles" className="principles">
+        <Riso src={backwaters} className="principles__band" />
+        <blockquote>
+          <p>I build systems that think, remember and ship.</p>
+          <p className="principles__rest">Everything else is configuration.</p>
+        </blockquote>
+      </Page>
+
+      {/* back cover */}
+      <Page n={0} label="Back cover: contact" className="back">
+        <Riso src={bangalore} className="back__art" />
+        <div className="back__text">
+          <h2>Say hello.</h2>
+          <a className="back__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
+          <p className="back__links">
+            <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          </p>
+          <p className="back__credits">Vidhana Soudha after DeepanjanGhosh (CC BY-SA 4.0); microphone after Will Fisher (CC BY-SA 2.0); George Peabody Library after Matthew Petroff (CC BY-SA 3.0); Nachet microscope after Didier Descouens (CC BY-SA 4.0); server racks after NOIRLab/NSF/AURA/T. Slovinský (CC BY 4.0). நன்றி · धन्यवाद.</p>
         </div>
-      </section>
-    </>
+      </Page>
+    </Zine>
   );
 }
