@@ -1,7 +1,6 @@
 import { Noto_Serif, Noto_Serif_Devanagari, Literata, JetBrains_Mono } from 'next/font/google';
 import Hud from '@/components/Hud';
 import Footer from '@/components/Footer';
-import Preloader from '@/components/Preloader';
 import '../styles/globals.css';
 
 const display = Noto_Serif({ subsets: ['latin'], display: 'swap', weight: ['700'], variable: '--font-noto' });
@@ -17,15 +16,9 @@ export const metadata = {
 
 export const viewport = { themeColor: '#f3ead6' };
 
-// Skip the greeting for the rest of the session once it has played (set before paint, so it never flashes).
-const seenScript = "try{if(sessionStorage.getItem('yatra-seen'))document.documentElement.dataset.seen='1'}catch(e){}";
-
 export default function Layout({ children }) {
   return (
     <html lang="en" className={`${display.variable} ${deva.variable} ${body.variable} ${mono.variable}`} data-scheme="day" suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: seenScript }} />
-      </head>
       <body>
         <a className="skip" href="#main">Skip to content</a>
         {/* CRT wobble for the night feeds */}
@@ -37,7 +30,6 @@ export default function Layout({ children }) {
             <feDisplacementMap in="SourceGraphic" in2="n" scale="10" xChannelSelector="R" yChannelSelector="G" />
           </filter>
         </svg>
-        <Preloader />
         <Hud />
         <main id="main">{children}</main>
         <Footer />
