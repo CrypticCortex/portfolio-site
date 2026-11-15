@@ -1,44 +1,28 @@
-import { Inter, JetBrains_Mono } from "next/font/google";
-import "../styles/globals.css";
+import React from 'react';
+import { Noto_Serif, Noto_Sans } from 'next/font/google';
+import { cn } from '@/lib/utils';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import '../styles/globals.css';
 
-const fontSans = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-sans",
-});
-
-const fontMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-mono",
-});
+const fontHeading = Noto_Serif({ subsets: ['latin'], display: 'swap', variable: '--font-heading', weight: ['400', '600', '700'] });
+const fontBody = Noto_Sans({ subsets: ['latin'], display: 'swap', variable: '--font-body' });
 
 export const metadata = {
-  title: "Kalyan -- AI Engineer",
-  description:
-    "AI engineer building agentic LLM systems in production at Guidewire. Eval harnesses, not vibes. Published research and open-source contributions to AI infrastructure.",
-  keywords: ["AI Engineer", "LLM", "agentic systems", "MLOps", "evals", "RAG", "MCP", "Guidewire"],
-  openGraph: {
-    title: "Kalyan -- AI Engineer",
-    description:
-      "Agentic LLM systems in production, proven with eval harnesses. Research + merged open-source contributions.",
-    url: "https://crypticcortex.vercel.app",
-    type: "website",
-  },
+  title: 'Kalyan · Software × AI. Researcher. Builder.',
+  description: 'Kalyan — Software Engineer I at Guidewire, Bangalore, building AI agents. Agents, evaluation, MCP, medical and sonar vision research.',
 };
 
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontMono.variable}`} suppressHydrationWarning>
+    <html lang="en">
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var t=localStorage.getItem("theme");if(t==="light")document.documentElement.classList.add("light");})();`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: "try{if(sessionStorage.getItem('ay-seen'))document.documentElement.dataset.seen='1'}catch(e){}" }} />
       </head>
-      <body className="antialiased">
-        {children}
+      <body className={cn('antialiased', fontHeading.variable, fontBody.variable)}>
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

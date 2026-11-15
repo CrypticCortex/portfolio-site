@@ -1,42 +1,74 @@
-const { fontFamily } = require("tailwindcss/defaultTheme");
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+    './src/**/*.{js,ts,jsx,tsx}', 
+  ],
   theme: {
     extend: {
       fontFamily: {
-        mono: ["var(--font-mono)", ...fontFamily.mono],
+        heading: ['var(--font-heading)', ...fontFamily.serif],
+        body: ['var(--font-body)', ...fontFamily.sans],
+        serif: ['var(--font-heading)', ...fontFamily.serif],
       },
       colors: {
-        bg: "var(--bg)",
-        "bg-secondary": "var(--bg-secondary)",
-        "bg-code": "var(--bg-code)",
-        "text-primary": "var(--text-primary)",
-        "text-secondary": "var(--text-secondary)",
-        "text-comment": "var(--text-comment)",
-        accent: "var(--accent)",
-        "accent-dim": "var(--accent-dim)",
-        border: "var(--border)",
-        green: "var(--green)",
-        blue: "var(--blue)",
+        paper: '#f7f0e0',
+        paper2: '#efe4cb',
+        maroon: { DEFAULT: '#7a1a2a', light: '#932233' },
+        gold: { DEFAULT: '#d9a826', dark: '#9a7410' },
+        ink: '#2b1d16',
+        mute: '#6b5a48',
+        darkBlue: '#1e293b',
+        lightBlue: '#94a3b8',
+        textPrimary: '#e2e8f0',
+        textSecondary: '#cbd5e1',
+        gradientStart: '#7f7fd5',
+        gradientEnd: '#86a8e7',
+        gradientBg: '#1e293b',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
       },
-      maxWidth: {
-        page: "1200px",
-        content: "640px",
-      },
-      borderWidth: {
-        3: "3px",
-      },
-      fontSize: {
-        xs: ["clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem)", { lineHeight: "1.5" }],
-        sm: ["clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem)", { lineHeight: "1.6" }],
-        base: ["clamp(0.875rem, 0.8rem + 0.375vw, 1rem)", { lineHeight: "1.6" }],
-        lg: ["clamp(1.1rem, 1rem + 0.5vw, 1.25rem)", { lineHeight: "1.4" }],
-        xl: ["clamp(1.5rem, 1.25rem + 1.25vw, 2rem)", { lineHeight: "1.2" }],
-        "2xl": ["clamp(2rem, 1.5rem + 2.5vw, 3rem)", { lineHeight: "1.1" }],
+      borderRadius: {
+        xl: `calc(var(--radius) + 4px)`,
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: `calc(var(--radius) - 4px)`,
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@iconify/tailwind'),
+  ],
 };
