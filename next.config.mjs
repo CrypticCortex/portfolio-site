@@ -1,12 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // the old subpages now live inside the zine
+  // the old subpages are stops on the journey now
   async redirects() {
-    return [
-      { source: '/research', destination: '/#p11', permanent: true },
-      { source: '/education', destination: '/#p12', permanent: true },
-      { source: '/stack', destination: '/#p13', permanent: true },
-    ];
+    return ['/research', '/education', '/stack'].map((source) => ({ source, destination: '/', permanent: true }));
   },
 };
 

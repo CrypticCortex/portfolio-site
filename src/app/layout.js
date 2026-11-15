@@ -8,11 +8,11 @@ const mono = JetBrains_Mono({ subsets: ['latin'], display: 'swap', weight: ['400
 
 export const metadata = {
   metadataBase: new URL('https://crypticcortex.vercel.app'),
-  title: 'Kalyan, Issue 01 · Software × AI, Bangalore',
-  description: 'A 16-page zine about Kalyan, Software Engineer I at Guidewire in Bangalore, working where AI meets software: agents, evaluation frameworks and memory for coding agents.',
+  title: 'Kalyan · Software × AI, Bangalore',
+  description: 'Kalyan, Software Engineer I at Guidewire in Bangalore, working where AI meets software. The site is an endless landscape painted live in Bangalore\u2019s current light and weather.',
 };
 
-export const viewport = { themeColor: '#231a15' };
+export const viewport = { themeColor: '#1b1530' };
 
 export default function Layout({ children }) {
   return (
