@@ -8,13 +8,13 @@ function Index() {
       <header>
         <h1>{profile.name} <span lang="hi">{profile.native}</span></h1>
         <p>{profile.title} at Guidewire, Bangalore. Working where AI meets software.</p>
-        <p><a href={`mailto:${profile.email}`}>{profile.email}</a> · <a href={profile.github}>GitHub</a> · <a href={profile.linkedin}>LinkedIn</a></p>
+        <p className="cv__links"><a href={`mailto:${profile.email}`}>{profile.email}</a> <a href={profile.github}>GitHub</a> <a href={profile.linkedin}>LinkedIn</a></p>
       </header>
       <section>
         <h2>Work</h2>
         {experience.map((e) => (
           <article key={e.org}>
-            <h3>{e.org} <span>{e.role} · {e.when}</span></h3>
+            <h3>{e.org} <span>{e.role}, {e.when}</span></h3>
             <ul>{e.points.map((p) => <li key={p}>{p}</li>)}</ul>
           </article>
         ))}
@@ -23,7 +23,7 @@ function Index() {
         <h2>Projects</h2>
         {projects.map((p) => (
           <article key={p.name}>
-            <h3>{p.url ? <a href={p.url}>{p.name}</a> : p.name} <span>{p.stack.join(' · ')}</span></h3>
+            <h3>{p.url ? <a href={p.url}>{p.name}</a> : p.name} <span>{p.stack.join(', ')}</span></h3>
             <p>{p.blurb}</p>
           </article>
         ))}
@@ -45,5 +45,11 @@ function Index() {
 }
 
 export default function Home() {
-  return <Mind index={<Index />} />;
+  return (
+    <>
+      {/* without scripts the map cannot draw, so the index shows instead */}
+      <noscript dangerouslySetInnerHTML={{ __html: '<style>.index[hidden]{display:block}.index .panel__close{display:none}</style>' }} />
+      <Mind index={<Index />} />
+    </>
+  );
 }

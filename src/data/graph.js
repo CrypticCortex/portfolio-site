@@ -86,14 +86,15 @@ export function buildGraph() {
 }
 
 // Trains of thought the map plays by itself when left alone: a path along existing edges, and one sentence.
+// {Braces} mark a word on the map; the sentence shows it in that word's colour.
 export const thoughts = [
-  [['kalyan', 'guidewire', 'evals'], 'At Guidewire I build agents, and the multi-judge evals that decide whether they are good enough.'],
-  [['memory', 'agam', 't-mcp'], 'agam gives coding agents a memory: it injects context before they think to ask.'],
-  [['iisc-bangalore', 'tram', 'vision'], 'At IISc: transformers that find objects in side-scan sonar.'],
-  [['amrita-university', 'medgpt', 'medical'], 'MedGPT went into AIMS Kochi; diagnostic accuracy went from 30% to 80%.'],
-  [['voice', 'voice-fnol', 't-three-js'], 'Voice FNOL: file an insurance claim by just saying what happened.'],
-  [['agents', 'cognitive-os', 't-claude-code'], 'Cognitive OS: 14 agents and 30+ skills around a knowledge graph of 400+ entities.'],
-  [['kalyan', 'hexon-global', 'agents'], 'At Hexon: about 20% off the LLM bill through model-call optimisation.'],
-  [['agents', 'kanaku', 't-pgvector'], 'Kanaku scores dead stock for FMCG distributors across 74 real stores.'],
-  [['amrita-university', 'medflorence2', 'medical'], 'Five papers before graduating: medical VLMs, sonar, gait, stress, materials.'],
+  [['kalyan', 'guidewire', 'evals'], 'At {Guidewire} I build agents, and the multi-judge {evals} that decide whether they are good enough.'],
+  [['memory', 'agam', 't-mcp'], '{agam} gives coding agents a {memory}: it injects context before they think to ask.'],
+  [['iisc-bangalore', 'tram', 'vision'], 'At {IISc}: transformers that find objects in side-scan sonar.'],
+  [['amrita-university', 'medgpt', 'medical'], '{MedGPT} went into AIMS Kochi; diagnostic accuracy went from 30% to 80%.'],
+  [['voice', 'voice-fnol', 't-three-js'], '{Voice FNOL}: file an insurance claim by just saying what happened.'],
+  [['agents', 'cognitive-os', 't-claude-code'], '{Cognitive OS}: 14 agents and 30+ skills around a knowledge graph of 400+ entities.'],
+  [['kalyan', 'hexon-global', 'agents'], 'At {Hexon}: about 20% off the LLM bill through model-call optimisation.'],
+  [['agents', 'kanaku', 't-pgvector'], '{Kanaku} scores dead stock for FMCG distributors across 74 real stores.'],
+  [['amrita-university', 'medflorence2', 'medical'], 'Five papers before graduating: {medical} VLMs, sonar, gait, stress, materials.'],
 ];
